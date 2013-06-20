@@ -21,7 +21,7 @@
 <div id="answers">
     <?php foreach($question->getAnswers() as $answer ): ?>
         <div class="answer">
-            posted by <?php echo $answer->getUser()->getFirstName().''.$answer->getUser()->getLastName() ?>
+            posted by <?php echo $answer->getUser() ?>
             on <?php echo format_date($answer->getCreatedAt(), 'p') ?>
             <div>
                 <?php echo $answer->getBody() ?>
