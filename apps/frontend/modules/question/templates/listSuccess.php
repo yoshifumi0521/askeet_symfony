@@ -3,33 +3,26 @@
 // date: 2013/06/19 21:53:31
 ?>
 
-<h1>question</h1>
+<?php use_helper('Text') ?>
 
-<table>
-<thead>
-<tr>
-  <th>Id</th>
-  <th>User</th>
-  <th>Title</th>
-  <th>Body</th>
-  <th>Created at</th>
-  <th>Updated at</th>
-</tr>
-</thead>
-<tbody>
-<?php foreach ($questions as $question): ?>
-  <tr>
-    <td><?php echo link_to($question->getId(), 'question/show?id='.$question->getId()) ?></td>
-      <td><?php echo $question->getUserId() ?></td>
-      <td><?php echo $question->getTitle() ?></td>
-      <td><?php echo $question->getBody() ?></td>
-      <td><?php echo $question->getCreatedAt() ?></td>
-      <td><?php echo $question->getUpdatedAt() ?></td>
-      <td><?php echo link_to('edit', 'question/edit?id='.$question->getId()) ?></td>
-      <td><?php echo link_to('delete', 'question/delete?id='.$question->getId(), 'post=true&confirm=Are you sure?') ?></td>
-  </tr>
-<?php endforeach; ?>
-</tbody>
-</table>
+<h1>popular questions</h1>
+
+<?php foreach($questions as $question): ?>
+  <div class="question">
+
+    <div class="interested_block">
+      <div class="interested_mark" id="mark_<?php echo $question->getId() ?>">
+        <?php echo count($question->getInterests()) ?>
+      </div>
+    </div>
+
+    <h2><?php echo link_to($question->getTitle(), 'question/show?id='.$question->getId()) ?></h2>
+
+    <div class="question_body">
+      <?php echo truncate_text($question->getBody(), 200) ?>
+    </div>
+  </div>
+<?php endforeach;?>
+
 
 <?php echo link_to ('create', 'question/create') ?>

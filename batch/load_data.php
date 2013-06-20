@@ -11,6 +11,8 @@ require_once(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'apps'.DIRECTORY_SEPARATOR.SF_APP.D
 $databaseManager = new sfDatabaseManager();
 $databaseManager->initialize();
 
+$data = new sfPropelData();
+$data->loadData(sfConfig::get('sf_data_dir').DIRECTORY_SEPARATOR.'fixtures');
 ?>
 
 
