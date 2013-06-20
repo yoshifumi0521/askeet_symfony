@@ -16,6 +16,7 @@ CREATE TABLE `ask_question`
 	`user_id` INTEGER,
 	`title` TEXT,
 	`body` TEXT,
+	`interested_users` INTEGER default 0,
 	`created_at` DATETIME,
 	`updated_at` DATETIME,
 	PRIMARY KEY (`id`),
