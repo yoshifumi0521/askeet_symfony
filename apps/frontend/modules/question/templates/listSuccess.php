@@ -15,8 +15,10 @@
   <div class="question">
 
     <div class="interested_block">
+      <!-- 部分テンプレート -->
+      <!--<?php include_partial('interested_user', array('question' => $question)); ?>-->
       <div class="interested_mark" id="mark_<?php echo $question->getId() ?>">
-        <?php echo count($question->getInterests()) ?>
+        <?php echo count(question->getInterests()) ?>
       </div>
     </div>
 
