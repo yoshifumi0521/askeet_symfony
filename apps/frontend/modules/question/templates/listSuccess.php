@@ -18,13 +18,15 @@
 </thead>
 <tbody>
 <?php foreach ($questions as $question): ?>
-<tr>
+  <tr>
     <td><?php echo link_to($question->getId(), 'question/show?id='.$question->getId()) ?></td>
       <td><?php echo $question->getUserId() ?></td>
       <td><?php echo $question->getTitle() ?></td>
       <td><?php echo $question->getBody() ?></td>
       <td><?php echo $question->getCreatedAt() ?></td>
       <td><?php echo $question->getUpdatedAt() ?></td>
+      <td><?php echo link_to('edit', 'question/edit?id='.$question->getId()) ?></td>
+      <td><?php echo link_to('delete', 'question/delete?id='.$question->getId(), 'post=true&confirm=Are you sure?') ?></td>
   </tr>
 <?php endforeach; ?>
 </tbody>
