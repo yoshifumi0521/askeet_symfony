@@ -26,8 +26,15 @@ class questionActions extends sfActions
 
   public function executeShow()
   {
-    $this->question = QuestionPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->logMessage("target ".$this->getRequestParameter('stripped_title'));
+    // $this->question = QuestionPeer::retrieveByPk($this->getRequestParameter('id'));
+    // $this->forward404Unless($this->question);
+    $c = new Criteria();
+    $c->add(QuestionPeer::STRIPPED_TITLE, $this->getRequestParameter('stripped_title'));
+    $this->question = QuestionPeer::doSelectOne($c);
+
     $this->forward404Unless($this->question);
+
   }
 
   public function executeCreate()

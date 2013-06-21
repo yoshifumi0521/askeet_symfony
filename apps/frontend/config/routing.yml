@@ -1,3 +1,8 @@
+#ルーティングを変更した
+question:
+  url:   /question/:stripped_title
+  param: { module: question, action: show }
+
 # default rules
 homepage:
   url:   /
@@ -13,3 +18,4 @@ default_index:
 
 default:
   url:   /:module/:action/*
+
