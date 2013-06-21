@@ -16,7 +16,7 @@
 
     <div class="interested_block">
       <div class="interested_mark" id="mark_<?php echo $question->getId() ?>">
-        <?php echo count($question->getInterests()) ?>
+        <?php echo $question->getInterestedUsers() ?>
       </div>
     </div>
 
