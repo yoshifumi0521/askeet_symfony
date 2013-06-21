@@ -21,7 +21,20 @@ class questionActions extends sfActions
 
   public function executeList()
   {
-    $this->questions = QuestionPeer::doSelect(new Criteria());
+    // $this->questions = QuestionPeer::doSelect(new Criteria());
+    // $pager = new sfPropelPager('Question', 2);
+
+    //ページを分割して表示するために、Questionオブジェクトを分割して取得する。
+    $pager = new sfPropelPager('Question', 2);
+    $c = new Criteria();
+    $c->addDescendingOrderByColumn(QuestionPeer::INTERESTED_USERS);
+    $pager->setCriteria($c);
+    $pager->setPage($this->getRequestParameter('page', 1));
+    $pager->setPeerMethod('doSelectJoinUser');
+    $pager->init();
+
+    $this->question_pager = $pager;
+
   }
 
   public function executeShow()
