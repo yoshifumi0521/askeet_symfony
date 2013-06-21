@@ -39,6 +39,8 @@ CREATE TABLE `ask_answer`
 	`question_id` INTEGER,
 	`user_id` INTEGER,
 	`body` TEXT,
+	`relevancy_up` INTEGER default 0,
+	`relevancy_down` INTEGER default 0,
 	`created_at` DATETIME,
 	PRIMARY KEY (`id`),
 	INDEX `ask_answer_FI_1` (`question_id`),
