@@ -8,6 +8,10 @@ popular_questions:
   url:   /index/:page
   param: { module: question, action: list }
 
+login:
+  url:   /login
+  param: { module: user, action: login }
+
 # default rules
 homepage:
   url:   /

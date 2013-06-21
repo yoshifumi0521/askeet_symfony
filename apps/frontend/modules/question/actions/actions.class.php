@@ -25,15 +25,17 @@ class questionActions extends sfActions
     // $pager = new sfPropelPager('Question', 2);
 
     //ページを分割して表示するために、Questionオブジェクトを分割して取得する。
-    $pager = new sfPropelPager('Question', 2);
-    $c = new Criteria();
-    $c->addDescendingOrderByColumn(QuestionPeer::INTERESTED_USERS);
-    $pager->setCriteria($c);
-    $pager->setPage($this->getRequestParameter('page', 1));
-    $pager->setPeerMethod('doSelectJoinUser');
-    $pager->init();
+    // $pager = new sfPropelPager('Question', 2);
+    // $c = new Criteria();
+    // $c->addDescendingOrderByColumn(QuestionPeer::INTERESTED_USERS);
+    // $pager->setCriteria($c);
+    // $pager->setPage($this->getRequestParameter('page', 1));
+    // $pager->setPeerMethod('doSelectJoinUser');
+    // $pager->init();
 
-    $this->question_pager = $pager;
+    // $this->question_pager = $pager;
+    //ページ分割のデータを取得。getHomepagePagerメソッドは、QuestionPeerクラスで定義する。
+    $this->question_pager = QuestionPeer::getHomepagePager($this->getRequestParameter('page', 1));
 
   }
 
@@ -42,10 +44,15 @@ class questionActions extends sfActions
     $this->logMessage("target ".$this->getRequestParameter('stripped_title'));
     // $this->question = QuestionPeer::retrieveByPk($this->getRequestParameter('id'));
     // $this->forward404Unless($this->question);
-    $c = new Criteria();
-    $c->add(QuestionPeer::STRIPPED_TITLE, $this->getRequestParameter('stripped_title'));
-    $this->question = QuestionPeer::doSelectOne($c);
 
+    //ここをモデルで記述する。
+    // $c = new Criteria();
+    // $c->add(QuestionPeer::STRIPPED_TITLE, $this->getRequestParameter('stripped_title'));
+    // $this->question = QuestionPeer::doSelectOne($c);
+    // $this->forward404Unless($this->question);
+    $this->question = QuestionPeer::getQuestionFromTitle($this->getRequestParameter('stripped_title'));
+
+    //エラー処理
     $this->forward404Unless($this->question);
 
   }
