@@ -8,6 +8,7 @@ propel:
     title:       { type: longvarchar }
     body:        { type: longvarchar }
     interested_users: { type: integer, default: 0}
+    stripped_title: { type: longvarchar}
     created_at:  ~
     updated_at:  ~
 
@@ -41,4 +42,3 @@ propel:
     user_id:     { type: integer, foreignTable: ask_user, foreignReference: id, primaryKey: true }
     score:       { type: integer }
     created_at:  ~
-

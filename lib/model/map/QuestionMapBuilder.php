@@ -42,6 +42,8 @@ class QuestionMapBuilder {
 
 		$tMap->addColumn('INTERESTED_USERS', 'InterestedUsers', 'int', CreoleTypes::INTEGER, false, null);
 
+		$tMap->addColumn('STRIPPED_TITLE', 'StrippedTitle', 'string', CreoleTypes::VARCHAR, false, null);
+
 		$tMap->addColumn('CREATED_AT', 'CreatedAt', 'int', CreoleTypes::TIMESTAMP, false, null);
 
 		$tMap->addColumn('UPDATED_AT', 'UpdatedAt', 'int', CreoleTypes::TIMESTAMP, false, null);

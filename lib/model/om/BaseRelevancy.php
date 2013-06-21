@@ -4,59 +4,59 @@
 abstract class BaseRelevancy extends BaseObject  implements Persistent {
 
 
-
+	
 	protected static $peer;
 
 
-
+	
 	protected $answer_id;
 
 
-
+	
 	protected $user_id;
 
 
-
+	
 	protected $score;
 
 
-
+	
 	protected $created_at;
 
-
+	
 	protected $aAnswer;
 
-
+	
 	protected $aUser;
 
-
+	
 	protected $alreadyInSave = false;
 
-
+	
 	protected $alreadyInValidation = false;
 
-
+	
 	public function getAnswerId()
 	{
 
 		return $this->answer_id;
 	}
 
-
+	
 	public function getUserId()
 	{
 
 		return $this->user_id;
 	}
 
-
+	
 	public function getScore()
 	{
 
 		return $this->score;
 	}
 
-
+	
 	public function getCreatedAt($format = 'Y-m-d H:i:s')
 	{
 
@@ -78,7 +78,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 		}
 	}
 
-
+	
 	public function setAnswerId($v)
 	{
 
@@ -95,8 +95,8 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 			$this->aAnswer = null;
 		}
 
-	}
-
+	} 
+	
 	public function setUserId($v)
 	{
 
@@ -113,8 +113,8 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 			$this->aUser = null;
 		}
 
-	}
-
+	} 
+	
 	public function setScore($v)
 	{
 
@@ -127,8 +127,8 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 			$this->modifiedColumns[] = RelevancyPeer::SCORE;
 		}
 
-	}
-
+	} 
+	
 	public function setCreatedAt($v)
 	{
 
@@ -144,8 +144,8 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 			$this->modifiedColumns[] = RelevancyPeer::CREATED_AT;
 		}
 
-	}
-
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -162,13 +162,13 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 
 			$this->setNew(false);
 
-						return $startcol + 4;
+						return $startcol + 4; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Relevancy object", $e);
 		}
 	}
 
-
+	
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -190,7 +190,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 		}
 	}
 
-
+	
 	public function save($con = null)
 	{
     if ($this->isNew() && !$this->isColumnModified(RelevancyPeer::CREATED_AT))
@@ -217,14 +217,14 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 		}
 	}
 
-
+	
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
 			$this->alreadyInSave = true;
 
 
-
+												
 			if ($this->aAnswer !== null) {
 				if ($this->aAnswer->isModified()) {
 					$affectedRows += $this->aAnswer->save($con);
@@ -243,7 +243,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = RelevancyPeer::doInsert($this, $con);
-					$affectedRows += 1;
+					$affectedRows += 1; 										 										 
 					$this->setNew(false);
 				} else {
 					$affectedRows += RelevancyPeer::doUpdate($this, $con);
@@ -253,17 +253,17 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	}
-
+	} 
+	
 	protected $validationFailures = array();
 
-
+	
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-
+	
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -276,7 +276,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 		}
 	}
 
-
+	
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -286,7 +286,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-
+												
 			if ($this->aAnswer !== null) {
 				if (!$this->aAnswer->validate($columns)) {
 					$failureMap = array_merge($failureMap, $this->aAnswer->getValidationFailures());
@@ -312,14 +312,14 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-
+	
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = RelevancyPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-
+	
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -340,7 +340,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-
+	
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = RelevancyPeer::getFieldNames($keyType);
@@ -353,14 +353,14 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 		return $result;
 	}
 
-
+	
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = RelevancyPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-
+	
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -378,7 +378,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-
+	
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = RelevancyPeer::getFieldNames($keyType);
@@ -389,7 +389,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setCreatedAt($arr[$keys[3]]);
 	}
 
-
+	
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(RelevancyPeer::DATABASE_NAME);
@@ -402,7 +402,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-
+	
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(RelevancyPeer::DATABASE_NAME);
@@ -413,7 +413,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-
+	
 	public function getPrimaryKey()
 	{
 		$pks = array();
@@ -425,7 +425,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 		return $pks;
 	}
 
-
+	
 	public function setPrimaryKey($keys)
 	{
 
@@ -435,7 +435,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 
 	}
 
-
+	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
@@ -446,11 +446,11 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setAnswerId(NULL);
-		$copyObj->setUserId(NULL);
+		$copyObj->setAnswerId(NULL); 
+		$copyObj->setUserId(NULL); 
 	}
 
-
+	
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -459,7 +459,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-
+	
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -468,7 +468,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-
+	
 	public function setAnswer($v)
 	{
 
@@ -484,7 +484,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 	}
 
 
-
+	
 	public function getAnswer($con = null)
 	{
 		if ($this->aAnswer === null && ($this->answer_id !== null)) {
@@ -492,12 +492,12 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 
 			$this->aAnswer = AnswerPeer::retrieveByPK($this->answer_id, $con);
 
-
+			
 		}
 		return $this->aAnswer;
 	}
 
-
+	
 	public function setUser($v)
 	{
 
@@ -513,7 +513,7 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 	}
 
 
-
+	
 	public function getUser($con = null)
 	{
 		if ($this->aUser === null && ($this->user_id !== null)) {
@@ -521,9 +521,9 @@ abstract class BaseRelevancy extends BaseObject  implements Persistent {
 
 			$this->aUser = UserPeer::retrieveByPK($this->user_id, $con);
 
-
+			
 		}
 		return $this->aUser;
 	}
 
-}
+} 
