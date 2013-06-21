@@ -15,8 +15,8 @@
   <div id="header">
     <ul>
       <li><?php echo link_to('about', '@homepage') ?></li>
+      <li><?php echo link_to('sign in','user/login') ?></li>
     </ul>
-    <!-- <h1><?php echo link_to(image_tag('askeet_logo.gif', 'alt=askeet'), '@homepage') ?></h1> -->
   </div>
 
   <div id="content">
