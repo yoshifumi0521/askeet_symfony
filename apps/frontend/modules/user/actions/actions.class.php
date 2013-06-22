@@ -86,14 +86,14 @@ class userActions extends sfActions
     {
 
         $this->getUser()->setAuthenticated(false);
-      $this->getUser()->clearCredentials();
+        $this->getUser()->clearCredentials();
 
-      $this->getUser()->getAttributeHolder()->removeNamespace('subscriber');
+        $this->getUser()->getAttributeHolder()->removeNamespace('subscriber');
 
-      $this->redirect('@homepage');
+        $this->redirect('@homepage');
     }
 
-    //バリデーションで、ひっかかったらここをとおる。
+    //バリデーションで、ひっかかったらここをとおる。必ず必要なメソッド
     public function handleErrorLogin()
     {
         //バリデーションエラー

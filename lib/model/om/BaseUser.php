@@ -4,88 +4,121 @@
 abstract class BaseUser extends BaseObject  implements Persistent {
 
 
-	
+
 	protected static $peer;
 
 
-	
+
 	protected $id;
 
 
-	
+
 	protected $nickname;
 
 
-	
+
+	protected $email;
+
+
+
+	protected $sha1_password;
+
+
+
+	protected $salt;
+
+
+
 	protected $first_name;
 
 
-	
+
 	protected $last_name;
 
 
-	
+
 	protected $created_at;
 
-	
+
 	protected $collQuestions;
 
-	
+
 	protected $lastQuestionCriteria = null;
 
-	
+
 	protected $collAnswers;
 
-	
+
 	protected $lastAnswerCriteria = null;
 
-	
+
 	protected $collInterests;
 
-	
+
 	protected $lastInterestCriteria = null;
 
-	
+
 	protected $collRelevancys;
 
-	
+
 	protected $lastRelevancyCriteria = null;
 
-	
+
 	protected $alreadyInSave = false;
 
-	
+
 	protected $alreadyInValidation = false;
 
-	
+
 	public function getId()
 	{
 
 		return $this->id;
 	}
 
-	
+
 	public function getNickname()
 	{
 
 		return $this->nickname;
 	}
 
-	
+
+	public function getEmail()
+	{
+
+		return $this->email;
+	}
+
+
+	public function getSha1Password()
+	{
+
+		return $this->sha1_password;
+	}
+
+
+	public function getSalt()
+	{
+
+		return $this->salt;
+	}
+
+
 	public function getFirstName()
 	{
 
 		return $this->first_name;
 	}
 
-	
+
 	public function getLastName()
 	{
 
 		return $this->last_name;
 	}
 
-	
+
 	public function getCreatedAt($format = 'Y-m-d H:i:s')
 	{
 
@@ -107,7 +140,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function setId($v)
 	{
 
@@ -120,13 +153,13 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 			$this->modifiedColumns[] = UserPeer::ID;
 		}
 
-	} 
-	
+	}
+
 	public function setNickname($v)
 	{
 
 						if ($v !== null && !is_string($v)) {
-			$v = (string) $v; 
+			$v = (string) $v;
 		}
 
 		if ($this->nickname !== $v) {
@@ -134,13 +167,55 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 			$this->modifiedColumns[] = UserPeer::NICKNAME;
 		}
 
-	} 
-	
+	}
+
+	public function setEmail($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v;
+		}
+
+		if ($this->email !== $v) {
+			$this->email = $v;
+			$this->modifiedColumns[] = UserPeer::EMAIL;
+		}
+
+	}
+
+	public function setSha1Password($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v;
+		}
+
+		if ($this->sha1_password !== $v) {
+			$this->sha1_password = $v;
+			$this->modifiedColumns[] = UserPeer::SHA1_PASSWORD;
+		}
+
+	}
+
+	public function setSalt($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v;
+		}
+
+		if ($this->salt !== $v) {
+			$this->salt = $v;
+			$this->modifiedColumns[] = UserPeer::SALT;
+		}
+
+	}
+
 	public function setFirstName($v)
 	{
 
 						if ($v !== null && !is_string($v)) {
-			$v = (string) $v; 
+			$v = (string) $v;
 		}
 
 		if ($this->first_name !== $v) {
@@ -148,13 +223,13 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 			$this->modifiedColumns[] = UserPeer::FIRST_NAME;
 		}
 
-	} 
-	
+	}
+
 	public function setLastName($v)
 	{
 
 						if ($v !== null && !is_string($v)) {
-			$v = (string) $v; 
+			$v = (string) $v;
 		}
 
 		if ($this->last_name !== $v) {
@@ -162,8 +237,8 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 			$this->modifiedColumns[] = UserPeer::LAST_NAME;
 		}
 
-	} 
-	
+	}
+
 	public function setCreatedAt($v)
 	{
 
@@ -179,8 +254,8 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 			$this->modifiedColumns[] = UserPeer::CREATED_AT;
 		}
 
-	} 
-	
+	}
+
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -189,23 +264,29 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 
 			$this->nickname = $rs->getString($startcol + 1);
 
-			$this->first_name = $rs->getString($startcol + 2);
+			$this->email = $rs->getString($startcol + 2);
 
-			$this->last_name = $rs->getString($startcol + 3);
+			$this->sha1_password = $rs->getString($startcol + 3);
 
-			$this->created_at = $rs->getTimestamp($startcol + 4, null);
+			$this->salt = $rs->getString($startcol + 4);
+
+			$this->first_name = $rs->getString($startcol + 5);
+
+			$this->last_name = $rs->getString($startcol + 6);
+
+			$this->created_at = $rs->getTimestamp($startcol + 7, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 5; 
+						return $startcol + 8;
 		} catch (Exception $e) {
 			throw new PropelException("Error populating User object", $e);
 		}
 	}
 
-	
+
 	public function delete($con = null)
 	{
 		if ($this->isDeleted()) {
@@ -227,7 +308,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function save($con = null)
 	{
     if ($this->isNew() && !$this->isColumnModified(UserPeer::CREATED_AT))
@@ -254,7 +335,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doSave($con)
 	{
 		$affectedRows = 0; 		if (!$this->alreadyInSave) {
@@ -264,8 +345,8 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = UserPeer::doInsert($this, $con);
-					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
+					$affectedRows += 1;
+					$this->setId($pk);
 					$this->setNew(false);
 				} else {
 					$affectedRows += UserPeer::doUpdate($this, $con);
@@ -307,17 +388,17 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
-	} 
-	
+	}
+
 	protected $validationFailures = array();
 
-	
+
 	public function getValidationFailures()
 	{
 		return $this->validationFailures;
 	}
 
-	
+
 	public function validate($columns = null)
 	{
 		$res = $this->doValidate($columns);
@@ -330,7 +411,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	protected function doValidate($columns = null)
 	{
 		if (!$this->alreadyInValidation) {
@@ -384,14 +465,14 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return (!empty($failureMap) ? $failureMap : true);
 	}
 
-	
+
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = UserPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
-	
+
 	public function getByPosition($pos)
 	{
 		switch($pos) {
@@ -402,12 +483,21 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 				return $this->getNickname();
 				break;
 			case 2:
-				return $this->getFirstName();
+				return $this->getEmail();
 				break;
 			case 3:
-				return $this->getLastName();
+				return $this->getSha1Password();
 				break;
 			case 4:
+				return $this->getSalt();
+				break;
+			case 5:
+				return $this->getFirstName();
+				break;
+			case 6:
+				return $this->getLastName();
+				break;
+			case 7:
 				return $this->getCreatedAt();
 				break;
 			default:
@@ -415,28 +505,31 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 				break;
 		} 	}
 
-	
+
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = UserPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getId(),
 			$keys[1] => $this->getNickname(),
-			$keys[2] => $this->getFirstName(),
-			$keys[3] => $this->getLastName(),
-			$keys[4] => $this->getCreatedAt(),
+			$keys[2] => $this->getEmail(),
+			$keys[3] => $this->getSha1Password(),
+			$keys[4] => $this->getSalt(),
+			$keys[5] => $this->getFirstName(),
+			$keys[6] => $this->getLastName(),
+			$keys[7] => $this->getCreatedAt(),
 		);
 		return $result;
 	}
 
-	
+
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
 		$pos = UserPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
-	
+
 	public function setByPosition($pos, $value)
 	{
 		switch($pos) {
@@ -447,35 +540,50 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 				$this->setNickname($value);
 				break;
 			case 2:
-				$this->setFirstName($value);
+				$this->setEmail($value);
 				break;
 			case 3:
-				$this->setLastName($value);
+				$this->setSha1Password($value);
 				break;
 			case 4:
+				$this->setSalt($value);
+				break;
+			case 5:
+				$this->setFirstName($value);
+				break;
+			case 6:
+				$this->setLastName($value);
+				break;
+			case 7:
 				$this->setCreatedAt($value);
 				break;
 		} 	}
 
-	
+
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
 		$keys = UserPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setNickname($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setFirstName($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setLastName($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setCreatedAt($arr[$keys[4]]);
+		if (array_key_exists($keys[2], $arr)) $this->setEmail($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setSha1Password($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setSalt($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setFirstName($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setLastName($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCreatedAt($arr[$keys[7]]);
 	}
 
-	
+
 	public function buildCriteria()
 	{
 		$criteria = new Criteria(UserPeer::DATABASE_NAME);
 
 		if ($this->isColumnModified(UserPeer::ID)) $criteria->add(UserPeer::ID, $this->id);
 		if ($this->isColumnModified(UserPeer::NICKNAME)) $criteria->add(UserPeer::NICKNAME, $this->nickname);
+		if ($this->isColumnModified(UserPeer::EMAIL)) $criteria->add(UserPeer::EMAIL, $this->email);
+		if ($this->isColumnModified(UserPeer::SHA1_PASSWORD)) $criteria->add(UserPeer::SHA1_PASSWORD, $this->sha1_password);
+		if ($this->isColumnModified(UserPeer::SALT)) $criteria->add(UserPeer::SALT, $this->salt);
 		if ($this->isColumnModified(UserPeer::FIRST_NAME)) $criteria->add(UserPeer::FIRST_NAME, $this->first_name);
 		if ($this->isColumnModified(UserPeer::LAST_NAME)) $criteria->add(UserPeer::LAST_NAME, $this->last_name);
 		if ($this->isColumnModified(UserPeer::CREATED_AT)) $criteria->add(UserPeer::CREATED_AT, $this->created_at);
@@ -483,7 +591,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function buildPkeyCriteria()
 	{
 		$criteria = new Criteria(UserPeer::DATABASE_NAME);
@@ -493,23 +601,29 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return $criteria;
 	}
 
-	
+
 	public function getPrimaryKey()
 	{
 		return $this->getId();
 	}
 
-	
+
 	public function setPrimaryKey($key)
 	{
 		$this->setId($key);
 	}
 
-	
+
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
 		$copyObj->setNickname($this->nickname);
+
+		$copyObj->setEmail($this->email);
+
+		$copyObj->setSha1Password($this->sha1_password);
+
+		$copyObj->setSalt($this->salt);
 
 		$copyObj->setFirstName($this->first_name);
 
@@ -537,14 +651,14 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 				$copyObj->addRelevancy($relObj->copy($deepCopy));
 			}
 
-		} 
+		}
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setId(NULL);
 	}
 
-	
+
 	public function copy($deepCopy = false)
 	{
 				$clazz = get_class($this);
@@ -553,7 +667,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return $copyObj;
 	}
 
-	
+
 	public function getPeer()
 	{
 		if (self::$peer === null) {
@@ -562,7 +676,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return self::$peer;
 	}
 
-	
+
 	public function initQuestions()
 	{
 		if ($this->collQuestions === null) {
@@ -570,7 +684,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function getQuestions($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseQuestionPeer.php';
@@ -594,7 +708,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 			}
 		} else {
 						if (!$this->isNew()) {
-												
+
 
 				$criteria->add(QuestionPeer::USER_ID, $this->getId());
 
@@ -608,7 +722,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return $this->collQuestions;
 	}
 
-	
+
 	public function countQuestions($criteria = null, $distinct = false, $con = null)
 	{
 				include_once 'lib/model/om/BaseQuestionPeer.php';
@@ -625,14 +739,14 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return QuestionPeer::doCount($criteria, $distinct, $con);
 	}
 
-	
+
 	public function addQuestion(Question $l)
 	{
 		$this->collQuestions[] = $l;
 		$l->setUser($this);
 	}
 
-	
+
 	public function initAnswers()
 	{
 		if ($this->collAnswers === null) {
@@ -640,7 +754,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function getAnswers($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseAnswerPeer.php';
@@ -664,7 +778,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 			}
 		} else {
 						if (!$this->isNew()) {
-												
+
 
 				$criteria->add(AnswerPeer::USER_ID, $this->getId());
 
@@ -678,7 +792,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return $this->collAnswers;
 	}
 
-	
+
 	public function countAnswers($criteria = null, $distinct = false, $con = null)
 	{
 				include_once 'lib/model/om/BaseAnswerPeer.php';
@@ -695,7 +809,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return AnswerPeer::doCount($criteria, $distinct, $con);
 	}
 
-	
+
 	public function addAnswer(Answer $l)
 	{
 		$this->collAnswers[] = $l;
@@ -703,7 +817,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 	}
 
 
-	
+
 	public function getAnswersJoinQuestion($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseAnswerPeer.php';
@@ -725,7 +839,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 				$this->collAnswers = AnswerPeer::doSelectJoinQuestion($criteria, $con);
 			}
 		} else {
-									
+
 			$criteria->add(AnswerPeer::USER_ID, $this->getId());
 
 			if (!isset($this->lastAnswerCriteria) || !$this->lastAnswerCriteria->equals($criteria)) {
@@ -737,7 +851,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return $this->collAnswers;
 	}
 
-	
+
 	public function initInterests()
 	{
 		if ($this->collInterests === null) {
@@ -745,7 +859,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function getInterests($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseInterestPeer.php';
@@ -769,7 +883,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 			}
 		} else {
 						if (!$this->isNew()) {
-												
+
 
 				$criteria->add(InterestPeer::USER_ID, $this->getId());
 
@@ -783,7 +897,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return $this->collInterests;
 	}
 
-	
+
 	public function countInterests($criteria = null, $distinct = false, $con = null)
 	{
 				include_once 'lib/model/om/BaseInterestPeer.php';
@@ -800,7 +914,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return InterestPeer::doCount($criteria, $distinct, $con);
 	}
 
-	
+
 	public function addInterest(Interest $l)
 	{
 		$this->collInterests[] = $l;
@@ -808,7 +922,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 	}
 
 
-	
+
 	public function getInterestsJoinQuestion($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseInterestPeer.php';
@@ -830,7 +944,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 				$this->collInterests = InterestPeer::doSelectJoinQuestion($criteria, $con);
 			}
 		} else {
-									
+
 			$criteria->add(InterestPeer::USER_ID, $this->getId());
 
 			if (!isset($this->lastInterestCriteria) || !$this->lastInterestCriteria->equals($criteria)) {
@@ -842,7 +956,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return $this->collInterests;
 	}
 
-	
+
 	public function initRelevancys()
 	{
 		if ($this->collRelevancys === null) {
@@ -850,7 +964,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		}
 	}
 
-	
+
 	public function getRelevancys($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseRelevancyPeer.php';
@@ -874,7 +988,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 			}
 		} else {
 						if (!$this->isNew()) {
-												
+
 
 				$criteria->add(RelevancyPeer::USER_ID, $this->getId());
 
@@ -888,7 +1002,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return $this->collRelevancys;
 	}
 
-	
+
 	public function countRelevancys($criteria = null, $distinct = false, $con = null)
 	{
 				include_once 'lib/model/om/BaseRelevancyPeer.php';
@@ -905,7 +1019,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return RelevancyPeer::doCount($criteria, $distinct, $con);
 	}
 
-	
+
 	public function addRelevancy(Relevancy $l)
 	{
 		$this->collRelevancys[] = $l;
@@ -913,7 +1027,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 	}
 
 
-	
+
 	public function getRelevancysJoinAnswer($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseRelevancyPeer.php';
@@ -935,7 +1049,7 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 				$this->collRelevancys = RelevancyPeer::doSelectJoinAnswer($criteria, $con);
 			}
 		} else {
-									
+
 			$criteria->add(RelevancyPeer::USER_ID, $this->getId());
 
 			if (!isset($this->lastRelevancyCriteria) || !$this->lastRelevancyCriteria->equals($criteria)) {
@@ -947,4 +1061,4 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 		return $this->collRelevancys;
 	}
 
-} 
+}

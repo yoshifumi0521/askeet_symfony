@@ -26,6 +26,9 @@ propel:
     _attributes: { phpName: User, idMethod: native }
     id:          { type: integer, required: true, primaryKey: true, autoIncrement: true }
     nickname:    { type: varchar(50), required: true, index: true }
+    email:       { type: varchar(100) }
+    sha1_password: {type: varchar(40)}
+    salt:        { type: varchar(32)}
     first_name:  varchar(100)
     last_name:   varchar(100)
     created_at:  ~

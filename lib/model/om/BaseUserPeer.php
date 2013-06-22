@@ -13,7 +13,7 @@ abstract class BaseUserPeer {
 	const CLASS_DEFAULT = 'lib.model.User';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -24,6 +24,15 @@ abstract class BaseUserPeer {
 
 	
 	const NICKNAME = 'ask_user.NICKNAME';
+
+	
+	const EMAIL = 'ask_user.EMAIL';
+
+	
+	const SHA1_PASSWORD = 'ask_user.SHA1_PASSWORD';
+
+	
+	const SALT = 'ask_user.SALT';
 
 	
 	const FIRST_NAME = 'ask_user.FIRST_NAME';
@@ -40,18 +49,18 @@ abstract class BaseUserPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Nickname', 'FirstName', 'LastName', 'CreatedAt', ),
-		BasePeer::TYPE_COLNAME => array (UserPeer::ID, UserPeer::NICKNAME, UserPeer::FIRST_NAME, UserPeer::LAST_NAME, UserPeer::CREATED_AT, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'nickname', 'first_name', 'last_name', 'created_at', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Nickname', 'Email', 'Sha1Password', 'Salt', 'FirstName', 'LastName', 'CreatedAt', ),
+		BasePeer::TYPE_COLNAME => array (UserPeer::ID, UserPeer::NICKNAME, UserPeer::EMAIL, UserPeer::SHA1_PASSWORD, UserPeer::SALT, UserPeer::FIRST_NAME, UserPeer::LAST_NAME, UserPeer::CREATED_AT, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'nickname', 'email', 'sha1_password', 'salt', 'first_name', 'last_name', 'created_at', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Nickname' => 1, 'FirstName' => 2, 'LastName' => 3, 'CreatedAt' => 4, ),
-		BasePeer::TYPE_COLNAME => array (UserPeer::ID => 0, UserPeer::NICKNAME => 1, UserPeer::FIRST_NAME => 2, UserPeer::LAST_NAME => 3, UserPeer::CREATED_AT => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'nickname' => 1, 'first_name' => 2, 'last_name' => 3, 'created_at' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Nickname' => 1, 'Email' => 2, 'Sha1Password' => 3, 'Salt' => 4, 'FirstName' => 5, 'LastName' => 6, 'CreatedAt' => 7, ),
+		BasePeer::TYPE_COLNAME => array (UserPeer::ID => 0, UserPeer::NICKNAME => 1, UserPeer::EMAIL => 2, UserPeer::SHA1_PASSWORD => 3, UserPeer::SALT => 4, UserPeer::FIRST_NAME => 5, UserPeer::LAST_NAME => 6, UserPeer::CREATED_AT => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'nickname' => 1, 'email' => 2, 'sha1_password' => 3, 'salt' => 4, 'first_name' => 5, 'last_name' => 6, 'created_at' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -108,6 +117,12 @@ abstract class BaseUserPeer {
 		$criteria->addSelectColumn(UserPeer::ID);
 
 		$criteria->addSelectColumn(UserPeer::NICKNAME);
+
+		$criteria->addSelectColumn(UserPeer::EMAIL);
+
+		$criteria->addSelectColumn(UserPeer::SHA1_PASSWORD);
+
+		$criteria->addSelectColumn(UserPeer::SALT);
 
 		$criteria->addSelectColumn(UserPeer::FIRST_NAME);
 

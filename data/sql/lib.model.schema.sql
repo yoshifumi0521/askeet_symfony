@@ -65,6 +65,9 @@ CREATE TABLE `ask_user`
 (
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
 	`nickname` VARCHAR(50)  NOT NULL,
+	`email` VARCHAR(100),
+	`sha1_password` VARCHAR(40),
+	`salt` VARCHAR(32),
 	`first_name` VARCHAR(100),
 	`last_name` VARCHAR(100),
 	`created_at` DATETIME,

@@ -1,21 +1,30 @@
 methods:
   post: [nickname, password]
-
+#sasa
 names:
   nickname:
     required:     true
     required_msg: your nickname is required
+    #nicknameValidatorとuserValidatorの2つのバリデーションを実行
     validators:   nicknameValidator
+    # validators:    [nicknameValidator, userValidator]
 
   password:
     required:     true
     required_msg: your password is required
 
+#文字の長さが5以上でないといけない。
 nicknameValidator:
     class:        sfStringValidator
     param:
       min:        5
       min_error:  nickname must be 5 or more characters
+
+# userValidator:
+#     class:         myLoginValidator
+#     param:
+#       password:    password
+#       login_error: this account does not exist or you entered a wrong password
 
 
 
