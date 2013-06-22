@@ -54,14 +54,16 @@ class userActions extends sfActions
                 {
                     //パスワードが正しい場合
                     $this->logMessage("target  パスワードが正しい");
-
+                    //認証をtrueにし、認証されていることにする。
                     $this->getUser()->setAuthenticated(true);
+                    //この意味がわからない。
                     $this->getUser()->addCredential('subscriber');
+
                     //セッションにidや名前などをいれる。
                     $this->getUser()->setAttribute('subscriber_id', $user->getId(), 'subscriber');
                     $this->getUser()->setAttribute('nickname', $user->getNickname(), 'subscriber');
 
-                    // 最後のページにリダイレクトする
+                    // 最後のページにリダイレクトする。フォームで、リファラーを取得しているのでそれを取得。
                     return $this->redirect($this->getRequestParameter('referer', '@homepage'));
                 }
                 else
