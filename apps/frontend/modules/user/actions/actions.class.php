@@ -84,7 +84,8 @@ class userActions extends sfActions
 
     public function executeLogout()
     {
-      $this->getUser()->setAuthenticated(false);
+
+        $this->getUser()->setAuthenticated(false);
       $this->getUser()->clearCredentials();
 
       $this->getUser()->getAttributeHolder()->removeNamespace('subscriber');
@@ -92,6 +93,13 @@ class userActions extends sfActions
       $this->redirect('@homepage');
     }
 
+    //バリデーションで、ひっかかったらここをとおる。
+    public function handleErrorLogin()
+    {
+        //バリデーションエラー
+        $this->logMessage("target  バリデーションエラー");
+        return sfView::SUCCESS;
+    }
 
 
 

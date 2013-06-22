@@ -1,0 +1,21 @@
+methods:
+  post: [nickname, password]
+
+names:
+  nickname:
+    required:     true
+    required_msg: your nickname is required
+    validators:   nicknameValidator
+
+  password:
+    required:     true
+    required_msg: your password is required
+
+nicknameValidator:
+    class:        sfStringValidator
+    param:
+      min:        5
+      min_error:  nickname must be 5 or more characters
+
+
+

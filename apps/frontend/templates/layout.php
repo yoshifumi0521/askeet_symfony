@@ -15,7 +15,7 @@
   <div id="header">
     <!-- 認証をしているか？の判定メソッド。$sf_user->isAuthenticated()がtrueなら、認証されているということ-->
     <?php if ($sf_user->isAuthenticated()): ?>
-      <li><?php echo link_to('sign out', 'user/logout') ?></li>
+      <li><?php echo link_to('logout', 'user/logout') ?></li>
       <li><?php echo link_to($sf_user->getAttribute('nickname', '', 'subscriber').' profile', 'user/profile') ?></li>
     <?php else: ?>
       <li><?php echo link_to('sign in/register', 'user/login') ?></li>
