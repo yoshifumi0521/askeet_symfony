@@ -25,59 +25,72 @@ class userActions extends sfActions
         // $this->getRequest()->setAttribute('referer', $this->getRequest()->getReferer());
         // return sfView::SUCCESS;
 
-        //POSTかGETかどうかで判断する。
         if ($this->getRequest()->getMethod() != sfRequest::POST)
         {
-            //GETできた場合
-            $this->logMessage("target  GETできた");
-            //GETで来た場合は、フォームを表示する
-            $this->getRequest()->setAttribute('referer', $this->getRequest()->getReferer());
+            // フォームを表示する
+            $this->getRequest()->getParameterHolder()->set('referer', $this->getRequest()->getReferer());
+            return sfView::SUCCESS;
         }
         else
         {
-            //POSTできた場合。
-            $this->logMessage("target  POSTできた");
-            // フォーム投稿を処理する
-            $nickname = $this->getRequestParameter('nickname');
+            // フォーム投稿を取り扱う
+            // 最後のページにリダイレクトする。リファラーに飛ばす。
+            return $this->redirect($this->getRequestParameter('referer', '@homepage'));
+        }
 
-            $c = new Criteria();
-            $c->add(UserPeer::NICKNAME,$nickname);
-            $user = UserPeer::doSelectOne($c);
+        // //POSTかGETかどうかで判断する。
+        // if ($this->getRequest()->getMethod() != sfRequest::POST)
+        // {
+        //     //GETできた場合
+        //     $this->logMessage("target  GETできた");
+        //     //GETで来た場合は、フォームを表示する
+        //     $this->getRequest()->setAttribute('referer', $this->getRequest()->getReferer());
+        // }
+        // else
+        // {
+            // //POSTできた場合。
+            // $this->logMessage("target  POSTできた");
+            // // フォーム投稿を処理する
+            // $nickname = $this->getRequestParameter('nickname');
 
-            if($user)
-            {
-                //ユーザーが登録していた場合
-                $this->logMessage("target  ユーザーが登録していた");
+            // $c = new Criteria();
+            // $c->add(UserPeer::NICKNAME,$nickname);
+            // $user = UserPeer::doSelectOne($c);
 
-                // passwordがOKか?
-                if (true)
-                {
-                    //パスワードが正しい場合
-                    $this->logMessage("target  パスワードが正しい");
-                    //認証をtrueにし、認証されていることにする。
-                    $this->getUser()->setAuthenticated(true);
-                    //この意味がわからない。
-                    $this->getUser()->addCredential('subscriber');
+            // if($user)
+            // {
+            //     //ユーザーが登録していた場合
+            //     $this->logMessage("target  ユーザーが登録していた");
 
-                    //セッションにidや名前などをいれる。
-                    $this->getUser()->setAttribute('subscriber_id', $user->getId(), 'subscriber');
-                    $this->getUser()->setAttribute('nickname', $user->getNickname(), 'subscriber');
+            //     // passwordがOKか?
+            //     if (true)
+            //     {
+            //         //パスワードが正しい場合
+            //         $this->logMessage("target  パスワードが正しい");
+            //         //認証をtrueにし、認証されていることにする。
+            //         $this->getUser()->setAuthenticated(true);
+            //         //この意味がわからない。
+            //         $this->getUser()->addCredential('subscriber');
 
-                    // 最後のページにリダイレクトする。フォームで、リファラーを取得しているのでそれを取得。
-                    return $this->redirect($this->getRequestParameter('referer', '@homepage'));
-                }
-                else
-                {
-                    //パスワードが正しくない場合
+            //         //セッションにidや名前などをいれる。
+            //         $this->getUser()->setAttribute('subscriber_id', $user->getId(), 'subscriber');
+            //         $this->getUser()->setAttribute('nickname', $user->getNickname(), 'subscriber');
+
+            //         // 最後のページにリダイレクトする。フォームで、リファラーを取得しているのでそれを取得。
+            //         return $this->redirect($this->getRequestParameter('referer', '@homepage'));
+            //     }
+            //     else
+            //     {
+            //         //パスワードが正しくない場合
 
 
-                }
-            }
-            else
-            {
-                //ユーザーが登録してなかった場合。
-                $this->logMessage("target  ユーザーが登録されてない");
-            }
+            //     }
+            // }
+            // else
+            // {
+            //     //ユーザーが登録してなかった場合。
+            //     $this->logMessage("target  ユーザーが登録されてない");
+            // }
 
         }
     }

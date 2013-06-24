@@ -3,7 +3,8 @@
 // date: 2013/06/19 21:53:31
 
   // var_dump(sfConfig::get('app_pager_homepage_max'));
-
+  //helperを使う。
+  use_helper('Text', 'Global');
 
 ?>
 
@@ -28,19 +29,26 @@
   </div>
 <?php endforeach;?>
 
+<!--ページネーションの表示-->
 <div id="question_pager">
-<?php if ($question_pager->haveToPaginate()): ?>
-  <?php echo link_to('&laquo;', 'question/list?page=1') ?>
-  <?php echo link_to('&lt;', 'question/list?page='.$question_pager->getPreviousPage()) ?>
 
-  <?php foreach ($question_pager->getLinks() as $page): ?>
-    <?php echo link_to_unless($page == $question_pager->getPage(), $page, 'question/list?page='.$page) ?>
-    <?php echo ($page != $question_pager->getCurrentMaxLink()) ? '-' : '' ?>
-  <?php endforeach; ?>
+  <?php echo pager_navigation($question_pager, 'question/list') ?>
 
-  <?php echo link_to('&gt;', 'question/list?page='.$question_pager->getNextPage()) ?>
-  <?php echo link_to('&raquo;', 'question/list?page='.$question_pager->getLastPage()) ?>
-<?php endif; ?>
+  <!-- <?php if ($question_pager->haveToPaginate()): ?>->
+    <!--1ページ目ページへのリンク-->
+    <!--<?php echo link_to('&laquo;', 'question/list?page=1') ?>-->
+    <!--<?php echo link_to('&lt;', 'question/list?page='.$question_pager->getPreviousPage()) ?>-->
+<!--
+      <?php foreach ($question_pager->getLinks() as $page): ?>
+        <?php echo link_to_unless($page == $question_pager->getPage(), $page, 'question/list?page='.$page) ?>
+        <?php echo ($page != $question_pager->getCurrentMaxLink()) ? '-' : '' ?>
+      <?php endforeach; ?> -->
+
+    <!-- <?php echo link_to('&gt;', 'question/list?page='.$question_pager->getNextPage()) ?> -->
+    <!--最後のページへのリンク-->
+    <!--?php echo link_to('&raquo;', 'question/list?page='.$question_pager->getLastPage()) ?>-->
+  <!-- <?php endif; ?> -->
+
 </div>
 
 <?php echo link_to ('create', 'question/create') ?>

@@ -6,8 +6,9 @@ names:
     required:     true
     required_msg: your nickname is required
     #nicknameValidatorとuserValidatorの2つのバリデーションを実行
-    validators:   nicknameValidator
-    # validators:    [nicknameValidator, userValidator]
+    # validators:   nicknameValidator
+    validators:    [nicknameValidator, userValidator]
+    # validators:    [ userValidator, nicknameValidator]
 
   password:
     required:     true
@@ -20,11 +21,11 @@ nicknameValidator:
       min:        5
       min_error:  nickname must be 5 or more characters
 
-# userValidator:
-#     class:         myLoginValidator
-#     param:
-#       password:    password
-#       login_error: this account does not exist or you entered a wrong password
+userValidator:
+    class:         myLoginValidator
+    param:
+      password:    password
+      login_error: this account does not exist or you entered a wrong password
 
 
 

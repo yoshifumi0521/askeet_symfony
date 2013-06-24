@@ -1,18 +1,6 @@
-#ルーティングを変更した
-question:
-  url:   /question/:stripped_title
-  param: { module: question, action: show }
 
-#ページの移動
-popular_questions:
-  url:   /index/:page
-  param: { module: question, action: list }
-
-login:
-  url:   /login
-  param: { module: user, action: login }
-
-# default rules
+#ここふがデフォルト設定
+# default rules。
 homepage:
   url:   /
   param: { module: question, action: list }
@@ -27,4 +15,26 @@ default_index:
 
 default:
   url:   /:module/:action/*
+
+
+
+#ルーティングを追加していく。
+question:
+  url:   /question/:stripped_title
+  param: { module: question, action: show }
+
+#ページの移動
+popular_questions:
+  url:   /index/:page
+  param: { module: question, action: list }
+
+#ページの移動
+recent_questions:
+  url:   /question/recent/:page
+  param: { module: question, action: recent,page: 1 }
+
+login:
+  url:   /login
+  param: { module: user, action: login }
+
 

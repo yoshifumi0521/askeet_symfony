@@ -1,0 +1,11 @@
+#questionモジュールのaddアクションのみ認証をつける。
+add:
+  is_secure:   on
+  credentials: subscriber
+
+all:
+  is_secure:   off
+
+
+
+

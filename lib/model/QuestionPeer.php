@@ -12,6 +12,8 @@ class QuestionPeer extends BaseQuestionPeer
     //ページ分割のオブジェクトを取得する。
     public static function getHomepagePager($page)
     {
+      //sfPropelPagerクラスはページネーションを扱うためのクラス。
+      //sfConfigは定数のクラス。
       $pager = new sfPropelPager('Question', sfConfig::get('app_pager_homepage_max'));
       $c = new Criteria();
       $c->addDescendingOrderByColumn(self::INTERESTED_USERS);
@@ -34,7 +36,21 @@ class QuestionPeer extends BaseQuestionPeer
 
     }
 
+    //最近の投稿をページネーションで取得する。
+    public static function getRecentPager($page)
+    {
+      $pager = new sfPropelPager('Question', sfConfig::get('app_pager_homepage_max'));
+      $c = new Criteria();
+      //created_at順に並べる。
+      $c->addDescendingOrderByColumn(self::CREATED_AT);
+      $pager->setCriteria($c);
+      $pager->setPage($page);
+      $pager->setPeerMethod('doSelectJoinUser');
+      $pager->init();
 
+      return $pager;
+
+    }
 
 
 
