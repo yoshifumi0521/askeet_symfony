@@ -37,4 +37,9 @@ login:
   url:   /login
   param: { module: user, action: login }
 
+recent_answers:
+  url:   /answer/recent/:page
+  param: { module: answer, action: recent,page: 1 }
+
+
 

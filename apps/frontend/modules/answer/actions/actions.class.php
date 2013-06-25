@@ -14,8 +14,19 @@ class answerActions extends sfActions
    * Executes index action
    *
    */
-  public function executeIndex()
-  {
-    $this->forward('default', 'module');
-  }
+    // public function executeIndex()
+    // {
+
+    // }
+
+    //最近の答えを取得する。
+    public function executeRecent()
+    {
+        $this->answer_pager = AnswerPeer::getRecentPager($this->getRequestParameter('page', 1));
+    }
+
+
+
+
+
 }
