@@ -10,6 +10,7 @@
 class User extends BaseUser
 {
     //__toString()メソッドはオブジェクトを文字として表現するために使われるデフォルトのメソッド
+    //echo $userとすれば、フルネームがでてくるようになる。
     public function __toString()
     {
         return $this->getFirstName().' '.$this->getLastName();
