@@ -1,6 +1,8 @@
 default:
   http_metas:
     content-type: text/html
+  components:
+    sidebar:      [sidebar, default]
 
   metas:
     title:        symfony project
@@ -15,3 +17,5 @@ default:
 
   has_layout:     on
   layout:         layout
+
+
