@@ -40,9 +40,12 @@ class myLoginValidator extends sfValidator
       // passwordはOKか？
       if (sha1($user->getSalt().$password) == $user->getSha1Password())
       {
+        //認証を与える。
         $this->getContext()->getUser()->setAuthenticated(true);
+        //許可を与える。セッションのデータを取り出すときは、subscriberを引数に与えないと取り出せない。
         $this->getContext()->getUser()->addCredential('subscriber');
-
+        //'subscriber'というパスワード？を与える。'subscriber'を引数に与えないとデータがとれないようにする。
+        //セッションに、subscriber_idとnicknameを与える。
         $this->getContext()->getUser()->setAttribute('subscriber_id', $user->getId(), 'subscriber');
         $this->getContext()->getUser()->setAttribute('nickname', $user->getNickname(), 'subscriber');
 
