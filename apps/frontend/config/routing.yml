@@ -5,7 +5,7 @@ question:
 
 #ページの移動
 popular_questions:
-  url:   /index/:page
+  url:   /index/list
   param: { module: question, action: list }
 
 #ページの移動
