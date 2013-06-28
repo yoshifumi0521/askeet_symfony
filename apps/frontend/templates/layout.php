@@ -18,13 +18,6 @@
   <div id="login" style="display: none">
     <h2>Please sign-in first</h2>
 
-    <?php echo link_to_function('cancel', visual_effect('blind_up', 'login', array('duration' => 0.5))) ?>
-
-  <?php echo form_tag('user/login', 'id=loginform') ?>
-    nickname: <?php echo input_tag('nickname') ?><br />
-    password: <?php echo input_password_tag('password') ?><br />
-    <?php echo input_hidden_tag('referer', $sf_params->get('referer') ? $sf_params->get('referer') : $sf_request->getUri()) ?>
-    <?php echo submit_tag('login') ?>
 
   </div>
 

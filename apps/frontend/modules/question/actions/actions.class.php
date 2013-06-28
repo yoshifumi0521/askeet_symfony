@@ -36,6 +36,7 @@ class questionActions extends sfActions
     // $this->question_pager = $pager;
     //ページ分割のデータを取得。getHomepagePagerメソッドは、QuestionPeerクラスで定義する。
     $this->question_pager = QuestionPeer::getHomepagePager($this->getRequestParameter('page', 1));
+
     // var_dump($this->question_pager->getPage() );
   }
 

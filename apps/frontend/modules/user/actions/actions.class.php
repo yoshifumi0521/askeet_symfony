@@ -24,7 +24,7 @@ class userActions extends sfActions
     {
         // $this->getRequest()->setAttribute('referer', $this->getRequest()->getReferer());
         // return sfView::SUCCESS;
-        $this->logMessage("aaaaaaaa");
+        $this->logMessage("bbbb");
         if ($this->getRequest()->getMethod() != sfRequest::POST)
         {
             // フォームを表示する
