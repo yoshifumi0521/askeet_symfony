@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <h2><?php echo link_to($question->getTitle(), 'question/show?stripped_title='.$question->getStrippedTitle() ) ?></h2>
+    <h2><?php echo link_to($question->getTitle(), '@question?stripped_title='.$question->getStrippedTitle() ) ?></h2>
 
     <div class="question_body">
       <?php echo truncate_text($question->getBody(), 200) ?>
