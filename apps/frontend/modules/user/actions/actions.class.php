@@ -97,8 +97,12 @@ class userActions extends sfActions
     // //プロフィールの表示
     public function executeShow()
     {
-        //ユーザーのデータを取得する。
-        $this->subscriber = UserPeer::retrieveByPk($this->getRequestParameter('id'));
+        //ユーザーのデータを取得する。パラメーターはid
+        // $this->subscriber = UserPeer::retrieveByPk($this->getRequestParameter('nickname'));
+        //ユーザーのデータを取得する。パラメーターは、nicknameで、UserPeer.phpにretrieveByNicknameメソッドを追加する。
+        $this->subscriber = UserPeer::retrieveByNickname($this->getRequestParameter('nickname'));
+
+        // var_dump($this->subscriber);
         // var_dump($this->subscriber);
         // var_dump($this->subscriber);
         // $this->subscriber = UserPeer::retrieveByPk($this->getRequestParameter('id', $this->getUser()->getSubscriberId()));

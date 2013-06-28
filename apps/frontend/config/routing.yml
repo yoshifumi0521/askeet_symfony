@@ -22,7 +22,7 @@ recent_answers:
   param: { module: answer, action: recent,page: 1 }
 
 user_profile:
-  url:   /user/show/:id
+  url:   /user/show/:nickname
   param: { module: user, action: show}
 
 

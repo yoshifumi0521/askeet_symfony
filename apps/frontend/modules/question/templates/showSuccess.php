@@ -23,9 +23,10 @@
 <h2><?php echo $question->getTitle() ?></h2>
 
 <div class="question_body">
-    <?php echo $question->getBody() ?>
+    <!-- マークダウンしたもの、$question->getHtmlBody()を出力する。 -->
+    <?php echo $question->getHtmlBody() ?>
     <div>
-        asked by <?php echo link_to($question->getUser(),'user/show?id='.$question->getUser()->getId()) ?>
+        asked by <?php echo link_to($question->getUser(),'@user_profile?nickname='.$question->getUser()->getNickname()) ?>
         on <?php echo format_date($question->getCreatedAt(), 'f') ?>
     <div>
 </di>
