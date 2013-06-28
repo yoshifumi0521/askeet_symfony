@@ -12,13 +12,34 @@
 </head>
 <body>
 
+  <!--インジケーター -->
+  <div id="indicator" style="display: none"></div>
+
+  <div id="login" style="display: none">
+    <h2>Please sign-in first</h2>
+
+    <?php echo link_to_function('cancel', visual_effect('blind_up', 'login', array('duration' => 0.5))) ?>
+
+  <?php echo form_tag('user/login', 'id=loginform') ?>
+    nickname: <?php echo input_tag('nickname') ?><br />
+    password: <?php echo input_password_tag('password') ?><br />
+    <?php echo input_hidden_tag('referer', $sf_params->get('referer') ? $sf_params->get('referer') : $sf_request->getUri()) ?>
+    <?php echo submit_tag('login') ?>
+
+  </div>
+
   <div id="header">
     <!-- 認証をしているか？の判定メソッド。$sf_user->isAuthenticated()がtrueなら、認証されているということ-->
     <?php if ($sf_user->isAuthenticated()): ?>
+
       <li><?php echo link_to('logout', 'user/logout') ?></li>
-      <li><?php echo link_to($sf_user->getAttribute('nickname', '', 'subscriber').' profile', 'user/profile') ?></li>
+      <!-- セッションに保存されている、nicknameを取り出す。-->
+      <li><?php echo link_to($sf_user->getAttribute('nickname', '', 'subscriber').' profile', 'user/show') ?></li>
+
     <?php else: ?>
+
       <li><?php echo link_to('sign in/register', 'user/login') ?></li>
+
     <?php endif ?>
   </div>
 

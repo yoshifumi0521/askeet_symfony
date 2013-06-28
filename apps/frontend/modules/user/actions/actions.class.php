@@ -24,7 +24,7 @@ class userActions extends sfActions
     {
         // $this->getRequest()->setAttribute('referer', $this->getRequest()->getReferer());
         // return sfView::SUCCESS;
-
+        $this->logMessage("aaaaaaaa");
         if ($this->getRequest()->getMethod() != sfRequest::POST)
         {
             // フォームを表示する
@@ -101,6 +101,7 @@ class userActions extends sfActions
         //ユーザーのデータを取得する。
         $this->subscriber = UserPeer::retrieveByPk($this->getRequestParameter('id'));
         // var_dump($this->subscriber);
+        // var_dump($this->subscriber);
         // $this->subscriber = UserPeer::retrieveByPk($this->getRequestParameter('id', $this->getUser()->getSubscriberId()));
         // var_dump( $this->getRequestParameter('id', $this->getUser()->getSubscriberId()) );
         // $this->forward404Unless($this->subcriber);
@@ -109,14 +110,38 @@ class userActions extends sfActions
 
         //Interestを取得するときに、Questionレコードも読み取る。
         $this->interests = $this->subscriber->getInterestsJoinQuestion();
-        // $this->answers = $this->subscriber->getAnswers();
-        //Answerを取得するときに、Questionレコードも読み取る。
+        // // $this->answers = $this->subscriber->getAnswers();
+        // //Answerを取得するときに、Questionレコードも読み取る。
         $this->answers   = $this->subscriber->getAnswersJoinQuestion();
         $this->questions = $this->subscriber->getQuestions();
         // var_dump($this->answers);
 
 
     }
+
+    //ユーザーの質問に対する興味を追加する。
+    public function executeInterested()
+    {
+        $this->logMessage("AJAx成功ー");
+        // $this->question = QuestionPeer::retrieveByPk($this->getRequestParameter('id'));
+        //$this->questionがなかったらエラー処理
+        // $this->forward404Unless($this->question);
+
+        // var_dump($this->getUser()->getAttribute('subscriber_id','subscriber'));
+        // $this->logMessage($this->getUser()->getAttribute('subscriber_id','','subscriber'));
+        $user = UserPeer::retrieveByPk($this->getUser()->getAttribute('subscriber_id','','subscriber'));
+        // $this->logMessage($user);
+        // var_dump($this->getAttribute('subscriber_id', '', 'subscriber'));
+        // $this->getUser()->setAttribute('member_id',
+        $interest = new Interest();
+        $interest->setQuestion($this->question);
+        $interest->setUser($user);
+        $interest->save();
+
+
+    }
+
+
 
     public function executeLogout()
     {

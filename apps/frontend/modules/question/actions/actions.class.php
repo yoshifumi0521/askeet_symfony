@@ -50,8 +50,8 @@ class questionActions extends sfActions
 
   public function executeShow()
   {
-    $this->logMessage("target ".$this->getRequestParameter('stripped_title'));
-    // $this->question = QuestionPeer::retrieveByPk($this->getRequestParameter('id'));
+    // $this->logMessage("target ".$this->getRequestParameter('stripped_title'));
+    $this->question = QuestionPeer::retrieveByPk($this->getRequestParameter('stripped_title'));
     // $this->forward404Unless($this->question);
 
     //ここをモデルで記述する。

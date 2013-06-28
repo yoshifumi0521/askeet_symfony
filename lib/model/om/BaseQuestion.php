@@ -33,6 +33,10 @@ abstract class BaseQuestion extends BaseObject  implements Persistent {
 
 
 	
+	protected $html_body;
+
+
+	
 	protected $created_at;
 
 
@@ -100,6 +104,13 @@ abstract class BaseQuestion extends BaseObject  implements Persistent {
 	{
 
 		return $this->stripped_title;
+	}
+
+	
+	public function getHtmlBody()
+	{
+
+		return $this->html_body;
 	}
 
 	
@@ -235,6 +246,20 @@ abstract class BaseQuestion extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setHtmlBody($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->html_body !== $v) {
+			$this->html_body = $v;
+			$this->modifiedColumns[] = QuestionPeer::HTML_BODY;
+		}
+
+	} 
+	
 	public function setCreatedAt($v)
 	{
 
@@ -285,15 +310,17 @@ abstract class BaseQuestion extends BaseObject  implements Persistent {
 
 			$this->stripped_title = $rs->getString($startcol + 5);
 
-			$this->created_at = $rs->getTimestamp($startcol + 6, null);
+			$this->html_body = $rs->getString($startcol + 6);
 
-			$this->updated_at = $rs->getTimestamp($startcol + 7, null);
+			$this->created_at = $rs->getTimestamp($startcol + 7, null);
+
+			$this->updated_at = $rs->getTimestamp($startcol + 8, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 8; 
+						return $startcol + 9; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Question object", $e);
 		}
@@ -498,9 +525,12 @@ abstract class BaseQuestion extends BaseObject  implements Persistent {
 				return $this->getStrippedTitle();
 				break;
 			case 6:
-				return $this->getCreatedAt();
+				return $this->getHtmlBody();
 				break;
 			case 7:
+				return $this->getCreatedAt();
+				break;
+			case 8:
 				return $this->getUpdatedAt();
 				break;
 			default:
@@ -519,8 +549,9 @@ abstract class BaseQuestion extends BaseObject  implements Persistent {
 			$keys[3] => $this->getBody(),
 			$keys[4] => $this->getInterestedUsers(),
 			$keys[5] => $this->getStrippedTitle(),
-			$keys[6] => $this->getCreatedAt(),
-			$keys[7] => $this->getUpdatedAt(),
+			$keys[6] => $this->getHtmlBody(),
+			$keys[7] => $this->getCreatedAt(),
+			$keys[8] => $this->getUpdatedAt(),
 		);
 		return $result;
 	}
@@ -555,9 +586,12 @@ abstract class BaseQuestion extends BaseObject  implements Persistent {
 				$this->setStrippedTitle($value);
 				break;
 			case 6:
-				$this->setCreatedAt($value);
+				$this->setHtmlBody($value);
 				break;
 			case 7:
+				$this->setCreatedAt($value);
+				break;
+			case 8:
 				$this->setUpdatedAt($value);
 				break;
 		} 	}
@@ -573,8 +607,9 @@ abstract class BaseQuestion extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setBody($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setInterestedUsers($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setStrippedTitle($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setCreatedAt($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setUpdatedAt($arr[$keys[7]]);
+		if (array_key_exists($keys[6], $arr)) $this->setHtmlBody($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCreatedAt($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setUpdatedAt($arr[$keys[8]]);
 	}
 
 	
@@ -588,6 +623,7 @@ abstract class BaseQuestion extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(QuestionPeer::BODY)) $criteria->add(QuestionPeer::BODY, $this->body);
 		if ($this->isColumnModified(QuestionPeer::INTERESTED_USERS)) $criteria->add(QuestionPeer::INTERESTED_USERS, $this->interested_users);
 		if ($this->isColumnModified(QuestionPeer::STRIPPED_TITLE)) $criteria->add(QuestionPeer::STRIPPED_TITLE, $this->stripped_title);
+		if ($this->isColumnModified(QuestionPeer::HTML_BODY)) $criteria->add(QuestionPeer::HTML_BODY, $this->html_body);
 		if ($this->isColumnModified(QuestionPeer::CREATED_AT)) $criteria->add(QuestionPeer::CREATED_AT, $this->created_at);
 		if ($this->isColumnModified(QuestionPeer::UPDATED_AT)) $criteria->add(QuestionPeer::UPDATED_AT, $this->updated_at);
 
@@ -629,6 +665,8 @@ abstract class BaseQuestion extends BaseObject  implements Persistent {
 		$copyObj->setInterestedUsers($this->interested_users);
 
 		$copyObj->setStrippedTitle($this->stripped_title);
+
+		$copyObj->setHtmlBody($this->html_body);
 
 		$copyObj->setCreatedAt($this->created_at);
 

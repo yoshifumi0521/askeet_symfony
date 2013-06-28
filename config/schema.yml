@@ -9,6 +9,7 @@ propel:
     body:        { type: longvarchar }
     interested_users: { type: integer, default: 0}
     stripped_title: { type: longvarchar}
+    html_body: {type: longvarchar}
     created_at:  ~
     updated_at:  ~
 

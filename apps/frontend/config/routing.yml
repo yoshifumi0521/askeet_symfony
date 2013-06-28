@@ -41,5 +41,12 @@ recent_answers:
   url:   /answer/recent/:page
   param: { module: answer, action: recent,page: 1 }
 
+# user_profile:
+#   url:   /user/show/:id
+#   param: { module: user, action: show}
+
+
+
+
 
 
