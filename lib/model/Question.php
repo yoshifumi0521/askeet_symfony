@@ -23,10 +23,14 @@ class Question extends BaseQuestion
     {
         //親のsetBodyメソッドを実行する。
         parent::setBody($v);
+        //markdownライブラリを取り入れる。
+        require_once('markdown.php');
 
-        // require_once('markdown.php');
+        // HTMLタグを剥ぎ取る
+        $v = htmlentities($v, ENT_QUOTES, 'UTF-8');
 
-
+        //データにいれる。
+        $this->setHtmlBody(markdown($v));
 
 
     }
