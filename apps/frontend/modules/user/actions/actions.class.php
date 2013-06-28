@@ -100,6 +100,7 @@ class userActions extends sfActions
         //ユーザーのデータを取得する。
         $this->subscriber = UserPeer::retrieveByPk($this->getRequestParameter('id'));
         // var_dump($this->subscriber);
+        // var_dump($this->subscriber);
         // $this->subscriber = UserPeer::retrieveByPk($this->getRequestParameter('id', $this->getUser()->getSubscriberId()));
         // var_dump( $this->getRequestParameter('id', $this->getUser()->getSubscriberId()) );
         // $this->forward404Unless($this->subcriber);
@@ -108,8 +109,10 @@ class userActions extends sfActions
 
         //Interestを取得するときに、Questionレコードも読み取る。
         $this->interests = $this->subscriber->getInterestsJoinQuestion();
+
         // $this->answers = $this->subscriber->getAnswers();
         // // //Answerを取得するときに、Questionレコードも読み取る。
+
         $this->answers   = $this->subscriber->getAnswersJoinQuestion();
         $this->questions = $this->subscriber->getQuestions();
         // var_dump($this->answers);

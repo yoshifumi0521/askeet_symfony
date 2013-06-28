@@ -18,7 +18,6 @@
   <div id="login" style="display: none">
     <h2>Please sign-in first</h2>
 
-
   </div>
 
   <div id="header">
@@ -27,6 +26,7 @@
 
       <li><?php echo link_to('logout', 'user/logout') ?></li>
       <!-- セッションに保存されている、nicknameを取り出す。-->
+
       <!-- <li><?php echo link_to($sf_user->getAttribute('nickname', '', 'subscriber').' profile',
       'user/show?id='.$sf_user->getAttribute('subscriber_id', '', 'subscriber')) ?></li> -->
 

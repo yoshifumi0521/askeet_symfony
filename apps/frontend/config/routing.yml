@@ -49,5 +49,12 @@ default:
 
 
 
+# user_profile:
+#   url:   /user/show/:id
+#   param: { module: user, action: show}
+
+
+
+
 
 
