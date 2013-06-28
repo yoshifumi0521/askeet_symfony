@@ -7,6 +7,7 @@ propel:
     user_id:     { type: integer, foreignTable: ask_user, foreignReference: id }
     title:       { type: longvarchar }
     body:        { type: longvarchar }
+    html_body:   { type: longvarchar }
     interested_users: { type: integer, default: 0}
     stripped_title: { type: longvarchar}
     html_body: {type: longvarchar}

@@ -18,6 +18,18 @@ class Question extends BaseQuestion
         $this->setStrippedTitle(myTools::stripText($v));
     }
 
+    //bodyを保存するときにする処理。子のQuestion.phpを優先的に実行する。
+    public function setBody($v)
+    {
+        //親のsetBodyメソッドを実行する。
+        parent::setBody($v);
+
+        // require_once('markdown.php');
+
+
+
+
+    }
 
 
 
