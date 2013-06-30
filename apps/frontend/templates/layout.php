@@ -24,16 +24,12 @@
     <!-- 認証をしているか？の判定メソッド。$sf_user->isAuthenticated()がtrueなら、認証されているということ-->
     <?php if ($sf_user->isAuthenticated()): ?>
 
-      <li><?php echo link_to('logout', 'user/logout') ?></li>
-      <!-- セッションに保存されている、nicknameを取り出す。-->
-
-      <!-- <li><?php echo link_to($sf_user->getAttribute('nickname', '', 'subscriber').' profile',
-      'user/show?id='.$sf_user->getAttribute('subscriber_id', '', 'subscriber')) ?></li> -->
-
       <li><?php echo link_to($sf_user->getAttribute('nickname', '', 'subscriber').' profile',
-      '@user_profile?id='.$sf_user->getAttribute('subscriber_id', '', 'subscriber')) ?></li>
+      '@user_profile?nickname='.$sf_user->getAttribute('nickname', '', 'subscriber')) ?></li>
 
+      <li><?php echo link_to('logout', 'user/logout') ?></li>
 
+    <!--ログインしていない。-->
     <?php else: ?>
 
       <li><?php echo link_to('sign in/register', 'user/login') ?></li>

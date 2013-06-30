@@ -101,7 +101,7 @@ class userActions extends sfActions
         // $this->subscriber = UserPeer::retrieveByPk($this->getRequestParameter('nickname'));
         //ユーザーのデータを取得する。パラメーターは、nicknameで、UserPeer.phpにretrieveByNicknameメソッドを追加する。
         $this->subscriber = UserPeer::retrieveByNickname($this->getRequestParameter('nickname'));
-
+        // var_dump($this->subscriber);
         // var_dump($this->subscriber);
         // var_dump($this->subscriber);
         // var_dump($this->subscriber);
