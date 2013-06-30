@@ -1,6 +1,6 @@
 #ルーティングを追加していく。
 question:
-  url:   /question/:stripped_title
+  url:   /question/show/:stripped_title
   param: { module: question, action: show }
 
 #ページの移動
@@ -26,6 +26,7 @@ user_profile:
   param: { module: user, action: show}
 
 
+
 #ここふがデフォルト設定
 # default rules。
 homepage:
@@ -43,15 +44,6 @@ default_index:
 default:
   url:   /:module/:action/*
 
-
-
-
-
-
-
-# user_profile:
-#   url:   /user/show/:id
-#   param: { module: user, action: show}
 
 
 

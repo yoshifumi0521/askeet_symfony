@@ -112,4 +112,22 @@ class questionActions extends sfActions
 
     return $this->redirect('question/list');
   }
+
+  //ユーザーが質問を加えるためのメソッド
+  public function executeAdd()
+  {
+
+
+
+  }
+
+  #バリデーションのエラーを起こす。
+  public function handleErrorAdd()
+  {
+    return sfView::SUCCESS;
+  }
+
+
+
+
 }
