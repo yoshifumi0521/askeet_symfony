@@ -4,3 +4,6 @@ all:
   pager:
     homepage_max: 2
 
+  feed:
+    max: 10
+

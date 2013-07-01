@@ -6,6 +6,8 @@
 <?php echo include_metas() ?>
 
 <?php echo include_title() ?>
+<!--フィード-->
+<?php echo auto_discovery_link_tag('rss', 'feed/popular') ?>
 
 <link rel="shortcut icon" href="/favicon.ico" />
 
