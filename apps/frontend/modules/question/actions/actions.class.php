@@ -117,6 +117,26 @@ class questionActions extends sfActions
   public function executeAdd()
   {
 
+    if($this->getRequest()->getMethod() != sfRequest::POST)
+    {
+      //GETできた場合
+      $this->logMessage("GETできた");
+
+
+
+
+    }
+    else
+    {
+      //POSTできた場合
+      $this->logMessage("POSTできた");
+
+
+
+
+    }
+
+
 
 
   }

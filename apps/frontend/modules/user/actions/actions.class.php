@@ -22,18 +22,20 @@ class userActions extends sfActions
     //ログインの時のメソッド
     public function executeLogin()
     {
+        $this->logMessage("ログインのアクション");
         // $this->getRequest()->setAttribute('referer', $this->getRequest()->getReferer());
         // return sfView::SUCCESS;
         if ($this->getRequest()->getMethod() != sfRequest::POST)
         {
             // フォームを表示する
+            //リファラーを取得
             $this->getRequest()->getParameterHolder()->set('referer', $this->getRequest()->getReferer());
             return sfView::SUCCESS;
         }
         else
         {
             // フォーム投稿を取り扱う
-            // 最後のページにリダイレクトする。リファラーに飛ばす。
+            // 最後のページにリダイレクトする。リファラーに飛ばす。リファラーがなかったら、ホームに飛ばす。
             return $this->redirect($this->getRequestParameter('referer', '@homepage'));
         }
 

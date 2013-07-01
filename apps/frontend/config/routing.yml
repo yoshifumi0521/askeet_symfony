@@ -25,7 +25,9 @@ user_profile:
   url:   /user/:nickname
   param: { module: user, action: show}
 
-
+add_question:
+  url:   /question/add
+  param: { module: question, action: add}
 
 #ここふがデフォルト設定
 # default rules。

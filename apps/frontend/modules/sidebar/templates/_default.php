@@ -1,5 +1,5 @@
 <!--　サイドバーのコンポーネント -->
-<?php echo link_to('ask a new question','question/add') ?>
+<?php echo link_to('ask a new question','@add_question') ?>
 
 <ul>
     <li><?php echo link_to('popular questions', 'question/list') ?></li>
