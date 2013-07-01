@@ -58,7 +58,7 @@
         'url'      => '@add_answer',
         'update'   => array('success' => 'add_answer'),
         'loading'  => "Element.show('indicator')",
-        'complete' => "Element.hide('indicator');".visual_effect('highlight', 'add_answer'),
+        'complete' => visual_effect('highlight', 'add_answer'),
     )) ?>
 
     <div class="form-row">
