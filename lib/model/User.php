@@ -24,7 +24,15 @@ class User extends BaseUser
         $this->setSha1Password(sha1($salt.$password));
     }
 
+    //ユーザーをお気に入りに追加する。
+    public function isInterestedIn($question)
+    {
+        $interest = new Interest();
+        $interest->setQuestion($question);
+        $interest->setUserId($this->getId());
+        $interest->save();
 
+    }
 
 
 

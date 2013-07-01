@@ -131,10 +131,24 @@ class questionActions extends sfActions
       //POSTできた場合
       $this->logMessage("POSTできた");
 
+      //ログインユーザーを取得する。
+      $user = UserPeer::retrieveByPk($this->getUser()->getAttribute('subscriber_id','','subscriber'));
 
+      //新しいQuestionオブジェクトを取得する。
+      $question = new Question();
+      $question->setTitle($this->getRequestParameter('title'));
+      $question->setBody($this->getRequestParameter('body'));
+      $question->setUser($user);
+      $question->save();
 
+      $user->isInterestedIn($question);
+
+      //質問のページに飛ばす。
+      return $this->redirect('@question?stripped_title='.$question->getStrippedTitle());
 
     }
+
+
 
 
 

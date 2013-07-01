@@ -29,6 +29,12 @@ add_question:
   url:   /question/add
   param: { module: question, action: add}
 
+add_answer:
+  url:   /add_anwser
+  param: { module: answer, action: add}
+
+
+
 #ここふがデフォルト設定
 # default rules。
 homepage:

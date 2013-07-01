@@ -43,6 +43,25 @@ function link_to_user_interested($user, $question)
     }
 }
 
+//リンクをつくる。
+function link_to_login($name, $uri = null)
+{
+  if ($uri && sfContext::getInstance()->getUser()->isAuthenticated())
+  {
+    return link_to($name, $uri);
+  }
+  else
+  {
+    //link_to_functionは、クリックしたら実行するリンクをつくる。
+    return link_to_function($name, visual_effect('blind_down', 'login', array('duration' => 0.5)));
+  }
+}
+
+
+
+
+
+
 ?>
 
 

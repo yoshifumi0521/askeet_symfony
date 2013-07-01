@@ -40,11 +40,50 @@
             <div>
                 <?php echo $answer->getBody() ?>
             </div>
-
-
         </div>
     <?php endforeach; ?>
 </div>
 
+<!--新しく追加する答え -->
+<div class="answer" id="add_answer">
+
+
+
+</div>
+
+<!-- 回答をする -->
+<div class="answer" id="add_answer">
+
+    <?php echo form_remote_tag(array(
+        'url'      => '@add_answer',
+        'update'   => array('success' => 'add_answer'),
+        'loading'  => "Element.show('indicator')",
+        'complete' => "Element.hide('indicator');".visual_effect('highlight', 'add_answer'),
+    )) ?>
+
+    <div class="form-row">
+        <!--ログインしている場合 -->
+        <?php if ($sf_user->isAuthenticated()): ?>
+            <?php echo $sf_user->getAttribute('nickname', '', 'subscriber') ?>
+        <?php else: ?>
+        <!-- ログインしてない場合 。その場合、匿名にする。Anonymous Cowardは、匿名という意味　-->
+            <?php echo 'Anonymous Coward' ?>
+            <?php echo link_to_login('login') ?>
+        <?php endif; ?>
+    </div>
+
+    <div class="form-row">
+        <label for="label">Your answer:</label>
+        <?php echo textarea_tag('body', $sf_params->get('body')) ?>
+    </div>
+
+    <div class="submit-row">
+        <?php echo input_hidden_tag('question_id', $question->getId()) ?>
+        <?php echo submit_tag('answer it') ?>
+    </div>
+
+    </form>
+
+</div>
 
 &nbsp;<?php echo link_to('list', 'question/list') ?>

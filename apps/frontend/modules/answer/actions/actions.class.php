@@ -25,7 +25,12 @@ class answerActions extends sfActions
         $this->answer_pager = AnswerPeer::getRecentPager($this->getRequestParameter('page', 1));
     }
 
+    //質問に対する回答をつくる。
+    public function executeAdd()
+    {
+      $this->logMessage("aaaaaaaaaa");
 
+    }
 
 
 
