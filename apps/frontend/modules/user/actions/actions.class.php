@@ -148,6 +148,15 @@ class userActions extends sfActions
 
     }
 
+    //パスワードの確認のメールをおくるためのメソッド
+    public function executePasswordRequest()
+    {
+        $this->logMessage("メールアドレスをおくる");
+
+
+
+    }
+
 
 
     public function executeLogout()
@@ -169,6 +178,13 @@ class userActions extends sfActions
         return sfView::SUCCESS;
     }
 
+    //バリデーションで、ひっかかったらここをとおる。必ず必要なメソッド
+    public function handleErrorPasswordRequest()
+    {
+        //バリデーションエラー
+        $this->logMessage("target  バリデーションエラー");
+        return sfView::SUCCESS;
+    }
 
 
 

@@ -40,6 +40,10 @@ feed_popular_questions:
   param: { module: feed, action: popular }
 
 
+user_require_password:
+  url:   /password_request
+  param: { module: user, action: passwordRequest }
+
 
 #ここふがデフォルト設定
 # default rules。
