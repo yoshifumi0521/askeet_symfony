@@ -151,7 +151,59 @@ class userActions extends sfActions
     //パスワードの確認のメールをおくるためのメソッド
     public function executePasswordRequest()
     {
-        $this->logMessage("メールアドレスをおくる");
+
+        if ($this->getRequest()->getMethod() != sfRequest::POST)
+        {
+            //GETできた場合
+            // アクションを終了して、フォームを表示する。
+            return sfView::SUCCESS;
+        }
+        else
+        {
+            //POSTできた場合
+            // フォーム投稿を取り扱う
+            $c = new Criteria();
+            #投稿したメールアドレスが登録されている、ユーザーのデータを取得する。
+            $c->add(UserPeer::EMAIL, $this->getRequestParameter('email'));
+            $user = UserPeer::doSelectOne($c);
+
+            #メールアドレスユーザーが存在する場合
+            if($user)
+            {
+                // 新しいランダムパスワードを設定する。
+                $password = substr(md5(rand(100000, 999999)), 0, 6);
+                $user->setPassword($password);
+
+                $this->getRequest()->setAttribute('password', $password);
+                $this->getRequest()->setAttribute('nickname', $user->getNickname());
+
+                //メールアクションをする。mail/sendPasswordアクションでメールを送る。
+                $raw_email = $this->sendEmail('mail', 'sendPassword');
+                $this->logMessage($raw_email, 'debug');
+
+                // 新しいパスワードを保存する
+                $user->save();
+                //passwordRequestMailSent.phpテンプレートを立ち上げる
+                return 'MailSent';
+            }
+            else
+            {
+                // メールアドレスを登録しているユーザーがいない場合
+                $this->getRequest()->setError('email', 'There is no askeet user with this email address. Please try again');
+                //アクションを終了して、viewを描く
+                return sfView::SUCCESS;
+
+            }
+
+
+
+        }
+
+
+
+
+
+
 
 
 
