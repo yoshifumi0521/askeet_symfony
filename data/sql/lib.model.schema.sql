@@ -130,11 +130,13 @@ DROP TABLE IF EXISTS `ask_question_tag`;
 
 CREATE TABLE `ask_question_tag`
 (
-	`user_id` INTEGER  NOT NULL,
+	`user_id` INTEGER,
 	`question_id` INTEGER,
 	`tag` VARCHAR(100),
 	`normalized_tag` VARCHAR(100),
-	PRIMARY KEY (`user_id`),
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY (`id`),
+	INDEX `ask_question_tag_FI_1` (`user_id`),
 	CONSTRAINT `ask_question_tag_FK_1`
 		FOREIGN KEY (`user_id`)
 		REFERENCES `ask_user` (`id`),

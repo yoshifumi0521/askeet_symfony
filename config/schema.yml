@@ -49,9 +49,10 @@ propel:
     created_at:  ~
 
   ask_question_tag:
-    user_id:     { type: integer, foreignTable: ask_user, foreignReference: id, primaryKey: true }
+    _attributes: { phpName: AskQuestionTag, idMethod: native }
+    user_id:     { type: integer, foreignTable: ask_user, foreignReference: id }
     question_id: { type: integer, foreignTable: ask_question, foreignReference: id }
-    tag:       { type: varchar(100) }
+    tag:         { type: varchar(100) }
     normalized_tag:       { type: varchar(100) }
 
 
