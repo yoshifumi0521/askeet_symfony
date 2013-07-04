@@ -91,7 +91,7 @@ Relevancy:
     user_id:   francois
     score:     -1
 
-AskQuestionTag:
+QuestionTag:
   t1: { question_id: q1, user_id: fabien, tag: relatives }
   t2: { question_id: q1, user_id: fabien, tag: girl }
   t4: { question_id: q1, user_id: francois, tag: activities }

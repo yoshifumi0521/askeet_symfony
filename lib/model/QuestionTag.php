@@ -7,9 +7,8 @@
  *
  * @package lib.model
  */
-class AskQuestionTag extends BaseAskQuestionTag
+class QuestionTag extends BaseQuestionTag
 {
-
     // normalized_tagを保存する。
     function setTag($v)
     {
@@ -19,11 +18,6 @@ class AskQuestionTag extends BaseAskQuestionTag
         $this->setNormalizedTag(Tag::normalize($v));
 
     }
-
-
-
-
-
 
 
 }

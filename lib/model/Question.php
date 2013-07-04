@@ -35,6 +35,26 @@ class Question extends BaseQuestion
 
     }
 
+    //質問に対するタグを取り出す。
+    function getTags()
+    {
+        $c = new Criteria();
+        $c->clearSelectColumns();
+        $c->addSelectColumn(QuestionTagPeer::NORMALIZED_TAG);
+        $c->add(QuestionTagPeer::QUESTION_ID, $this->getId());
+        $c->setDistinct();
+        $c->addAscendingOrderByColumn(QuestionTagPeer::NORMALIZED_TAG);
+
+        $tags = array();
+        $rs = QuestionTagPeer::doSelectRS($c);
+            while ($rs->next())
+        {
+            $tags[] = $rs->getString(1);
+        }
+        return $tags;
+
+    }
+
 
 
 

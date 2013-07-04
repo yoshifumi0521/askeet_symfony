@@ -7,6 +7,6 @@
  *
  * @package lib.model
  */ 
-class AskQuestionTagPeer extends BaseAskQuestionTagPeer
+class QuestionTagPeer extends BaseQuestionTagPeer
 {
 }

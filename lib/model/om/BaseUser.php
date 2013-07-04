@@ -64,10 +64,10 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 	protected $lastRelevancyCriteria = null;
 
 	
-	protected $collAskQuestionTags;
+	protected $collQuestionTags;
 
 	
-	protected $lastAskQuestionTagCriteria = null;
+	protected $lastQuestionTagCriteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -391,8 +391,8 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 				}
 			}
 
-			if ($this->collAskQuestionTags !== null) {
-				foreach($this->collAskQuestionTags as $referrerFK) {
+			if ($this->collQuestionTags !== null) {
+				foreach($this->collQuestionTags as $referrerFK) {
 					if (!$referrerFK->isDeleted()) {
 						$affectedRows += $referrerFK->save($con);
 					}
@@ -472,8 +472,8 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 					}
 				}
 
-				if ($this->collAskQuestionTags !== null) {
-					foreach($this->collAskQuestionTags as $referrerFK) {
+				if ($this->collQuestionTags !== null) {
+					foreach($this->collQuestionTags as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -673,8 +673,8 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 				$copyObj->addRelevancy($relObj->copy($deepCopy));
 			}
 
-			foreach($this->getAskQuestionTags() as $relObj) {
-				$copyObj->addAskQuestionTag($relObj->copy($deepCopy));
+			foreach($this->getQuestionTags() as $relObj) {
+				$copyObj->addQuestionTag($relObj->copy($deepCopy));
 			}
 
 		} 
@@ -1088,17 +1088,17 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 	}
 
 	
-	public function initAskQuestionTags()
+	public function initQuestionTags()
 	{
-		if ($this->collAskQuestionTags === null) {
-			$this->collAskQuestionTags = array();
+		if ($this->collQuestionTags === null) {
+			$this->collQuestionTags = array();
 		}
 	}
 
 	
-	public function getAskQuestionTags($criteria = null, $con = null)
+	public function getQuestionTags($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseAskQuestionTagPeer.php';
+				include_once 'lib/model/om/BaseQuestionTagPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -1107,36 +1107,36 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		if ($this->collAskQuestionTags === null) {
+		if ($this->collQuestionTags === null) {
 			if ($this->isNew()) {
-			   $this->collAskQuestionTags = array();
+			   $this->collQuestionTags = array();
 			} else {
 
-				$criteria->add(AskQuestionTagPeer::USER_ID, $this->getId());
+				$criteria->add(QuestionTagPeer::USER_ID, $this->getId());
 
-				AskQuestionTagPeer::addSelectColumns($criteria);
-				$this->collAskQuestionTags = AskQuestionTagPeer::doSelect($criteria, $con);
+				QuestionTagPeer::addSelectColumns($criteria);
+				$this->collQuestionTags = QuestionTagPeer::doSelect($criteria, $con);
 			}
 		} else {
 						if (!$this->isNew()) {
 												
 
-				$criteria->add(AskQuestionTagPeer::USER_ID, $this->getId());
+				$criteria->add(QuestionTagPeer::USER_ID, $this->getId());
 
-				AskQuestionTagPeer::addSelectColumns($criteria);
-				if (!isset($this->lastAskQuestionTagCriteria) || !$this->lastAskQuestionTagCriteria->equals($criteria)) {
-					$this->collAskQuestionTags = AskQuestionTagPeer::doSelect($criteria, $con);
+				QuestionTagPeer::addSelectColumns($criteria);
+				if (!isset($this->lastQuestionTagCriteria) || !$this->lastQuestionTagCriteria->equals($criteria)) {
+					$this->collQuestionTags = QuestionTagPeer::doSelect($criteria, $con);
 				}
 			}
 		}
-		$this->lastAskQuestionTagCriteria = $criteria;
-		return $this->collAskQuestionTags;
+		$this->lastQuestionTagCriteria = $criteria;
+		return $this->collQuestionTags;
 	}
 
 	
-	public function countAskQuestionTags($criteria = null, $distinct = false, $con = null)
+	public function countQuestionTags($criteria = null, $distinct = false, $con = null)
 	{
-				include_once 'lib/model/om/BaseAskQuestionTagPeer.php';
+				include_once 'lib/model/om/BaseQuestionTagPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -1145,23 +1145,23 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		$criteria->add(AskQuestionTagPeer::USER_ID, $this->getId());
+		$criteria->add(QuestionTagPeer::USER_ID, $this->getId());
 
-		return AskQuestionTagPeer::doCount($criteria, $distinct, $con);
+		return QuestionTagPeer::doCount($criteria, $distinct, $con);
 	}
 
 	
-	public function addAskQuestionTag(AskQuestionTag $l)
+	public function addQuestionTag(QuestionTag $l)
 	{
-		$this->collAskQuestionTags[] = $l;
+		$this->collQuestionTags[] = $l;
 		$l->setUser($this);
 	}
 
 
 	
-	public function getAskQuestionTagsJoinQuestion($criteria = null, $con = null)
+	public function getQuestionTagsJoinQuestion($criteria = null, $con = null)
 	{
-				include_once 'lib/model/om/BaseAskQuestionTagPeer.php';
+				include_once 'lib/model/om/BaseQuestionTagPeer.php';
 		if ($criteria === null) {
 			$criteria = new Criteria();
 		}
@@ -1170,26 +1170,26 @@ abstract class BaseUser extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		if ($this->collAskQuestionTags === null) {
+		if ($this->collQuestionTags === null) {
 			if ($this->isNew()) {
-				$this->collAskQuestionTags = array();
+				$this->collQuestionTags = array();
 			} else {
 
-				$criteria->add(AskQuestionTagPeer::USER_ID, $this->getId());
+				$criteria->add(QuestionTagPeer::USER_ID, $this->getId());
 
-				$this->collAskQuestionTags = AskQuestionTagPeer::doSelectJoinQuestion($criteria, $con);
+				$this->collQuestionTags = QuestionTagPeer::doSelectJoinQuestion($criteria, $con);
 			}
 		} else {
 									
-			$criteria->add(AskQuestionTagPeer::USER_ID, $this->getId());
+			$criteria->add(QuestionTagPeer::USER_ID, $this->getId());
 
-			if (!isset($this->lastAskQuestionTagCriteria) || !$this->lastAskQuestionTagCriteria->equals($criteria)) {
-				$this->collAskQuestionTags = AskQuestionTagPeer::doSelectJoinQuestion($criteria, $con);
+			if (!isset($this->lastQuestionTagCriteria) || !$this->lastQuestionTagCriteria->equals($criteria)) {
+				$this->collQuestionTags = QuestionTagPeer::doSelectJoinQuestion($criteria, $con);
 			}
 		}
-		$this->lastAskQuestionTagCriteria = $criteria;
+		$this->lastQuestionTagCriteria = $criteria;
 
-		return $this->collAskQuestionTags;
+		return $this->collQuestionTags;
 	}
 
 } 
