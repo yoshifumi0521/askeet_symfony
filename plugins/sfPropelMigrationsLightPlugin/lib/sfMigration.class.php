@@ -3,14 +3,14 @@
 /*
  * This file is part of the sfPropelMigrationsLightPlugin package.
  * (c) 2006-2008 Martin Kreidenweis <sf@kreidenweis.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
 /**
  * Base class for all migrations.
- *
+ * 
  * @package    symfony
  * @subpackage plugin
  * @author     Martin Kreidenweis <sf@kreidenweis.com>
@@ -24,7 +24,7 @@ abstract class sfMigration
 
   /**
    * Constructor.
-   *
+   * 
    * @param sfMigrator $migrator        The migrator instance calling this migration
    * @param integer    $migrationNumber The DB version the migration (up) will migrate to
    */
@@ -36,7 +36,7 @@ abstract class sfMigration
 
   /**
    * Get the migrator instance that called this migration.
-   *
+   * 
    * @return sfMigrator
    */
   public function getMigrator()
@@ -46,7 +46,7 @@ abstract class sfMigration
 
   /**
    * Get the Propel connection.
-   *
+   * 
    * @return mixed
    */
   protected function getConnection()
@@ -56,9 +56,9 @@ abstract class sfMigration
 
   /**
    * Get the migration number of this migration.
-   *
+   * 
    * @param   boolean $formatted If true the result is a zero-padded string, otherwise an integer is returned
-   *
+   * 
    * @return  mixed
    */
   protected function getMigrationNumber($formatted = true)
@@ -68,9 +68,9 @@ abstract class sfMigration
 
   /**
    * Execute a SQL statement.
-   *
+   * 
    * @param   string $sql the SQL code to execute
-   *
+   * 
    * @return  integer Number of affected rows
    */
   protected function executeSQL($sql)
@@ -80,10 +80,10 @@ abstract class sfMigration
 
   /**
    * Execute a SQL query.
-   *
+   * 
    * @param   string $sql The SQL statement.
    * @param   integer $fetchmode
-   *
+   * 
    * @return  mixed
    */
   protected function executeQuery($sql, $fetchmode = null)
@@ -124,13 +124,13 @@ abstract class sfMigration
 
   /**
    * Loads the fixture files of the migration.
-   *
+   * 
    * Has to be called manually.
-   *
-   * Be careful. Due to the nature Propel and fixture-loading works you'll
-   * probably get problems when you change the definitions of affected tables
+   * 
+   * Be careful. Due to the nature Propel and fixture-loading works you'll 
+   * probably get problems when you change the definitions of affected tables 
    * in later migrations.
-   *
+   * 
    * @param boolean $deleteOldRecords Whether the affected tables' content should be deleted prior to loading the fixtures, default: false
    * @param string  $con Propel connection identifier, as defined in the database.yml file
    */
@@ -150,7 +150,7 @@ abstract class sfMigration
 
   /**
    * Execute SQL from a file.
-   *
+   * 
    * @param   string $file Path to the SQL file
    */
   protected function loadSql($file)
@@ -197,7 +197,7 @@ abstract class sfMigration
 
   /**
    * Output some diagnostic or informational message.
-   *
+   * 
    * @param   string $text
    */
   protected function diag($text)

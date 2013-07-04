@@ -121,28 +121,5 @@ CREATE TABLE `ask_relevancy`
 		REFERENCES `ask_user` (`id`)
 )Type=InnoDB;
 
-#-----------------------------------------------------------------------------
-#-- ask_question_tag
-#-----------------------------------------------------------------------------
-
-DROP TABLE IF EXISTS `ask_question_tag`;
-
-
-CREATE TABLE `ask_question_tag`
-(
-	`user_id` INTEGER  NOT NULL,
-	`question_id` INTEGER,
-	`tag` VARCHAR(100),
-	`normalized_tag` VARCHAR(100),
-	PRIMARY KEY (`user_id`),
-	CONSTRAINT `ask_question_tag_FK_1`
-		FOREIGN KEY (`user_id`)
-		REFERENCES `ask_user` (`id`),
-	INDEX `ask_question_tag_FI_2` (`question_id`),
-	CONSTRAINT `ask_question_tag_FK_2`
-		FOREIGN KEY (`question_id`)
-		REFERENCES `ask_question` (`id`)
-)Type=InnoDB;
-
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;

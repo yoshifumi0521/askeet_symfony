@@ -3,14 +3,14 @@
 /*
  * This file is part of the sfPropelMigrationsLightPlugin package.
  * (c) 2006-2008 Martin Kreidenweis <sf@kreidenweis.com>
- *
+ * 
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
 /**
  * Symfony 1.0 tasks for sfPropelMigrationsLightPlugin.
- *
+ * 
  * @package    symfony
  * @subpackage plugin
  * @author     Martin Kreidenweis <sf@kreidenweis.com>
@@ -74,7 +74,7 @@ function run_migrate($task, $args)
   $migrator = new sfMigrator();
 
   // if no other arguments besides app, then migrate to latest version
-  if (count($args) == 1)
+  if (count($args) == 1) 
   {
     $runMigrationsCount = $migrator->migrate();
   }
