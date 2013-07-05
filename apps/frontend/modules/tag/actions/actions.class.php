@@ -14,8 +14,14 @@ class tagActions extends sfActions
    * Executes index action
    *
    */
-  public function executeIndex()
-  {
+    public function executeIndex()
+    {
     $this->forward('default', 'module');
-  }
+}
+
+    public function executeShow()
+    {
+        $this->question_pager = QuestionPeer::getPopularByTag($this->getRequestParameter('tag'), $this->getRequestParameter('page'));
+    }
+
 }

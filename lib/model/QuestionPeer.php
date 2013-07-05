@@ -52,7 +52,22 @@ class QuestionPeer extends BaseQuestionPeer
 
     }
 
+    //あるタグで一番人気の質問(多くのユーザーがタグづけしている)を取得する。
+    public static function getPopularByTag($tag, $page)
+    {
+        $c = new Criteria();
+        $c->add(QuestionTagPeer::NORMALIZED_TAG, $tag);
+        //タグ付けしたユーザー順に並べる。addDescendingOrderByColumn。
+        $c->addDescendingOrderByColumn(QuestionPeer::INTERESTED_USERS);
+        $c->addJoin(QuestionTagPeer::QUESTION_ID, QuestionPeer::ID, Criteria::LEFT_JOIN);
 
+        $pager = new sfPropelPager('Question', sfConfig::get('app_pager_homepage_max'));
+        $pager->setCriteria($c);
+        $pager->setPage($page);
+        $pager->init();
+
+        return $pager;
+    }
 
 
 
