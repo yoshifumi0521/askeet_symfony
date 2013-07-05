@@ -1,0 +1,5 @@
+#showアクションのみ
+showSuccess:
+  components:
+    sidebar: [sidebar, question]
+

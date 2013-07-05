@@ -35,7 +35,7 @@ class Question extends BaseQuestion
 
     }
 
-    //質問に対するタグを取り出す。
+    //質問に対するタグを取り出す。そのときにタグは重複しないようにする。
     function getTags()
     {
         $c = new Criteria();
@@ -47,7 +47,7 @@ class Question extends BaseQuestion
 
         $tags = array();
         $rs = QuestionTagPeer::doSelectRS($c);
-            while ($rs->next())
+        while ($rs->next())
         {
             $tags[] = $rs->getString(1);
         }
@@ -55,6 +55,37 @@ class Question extends BaseQuestion
 
     }
 
+    public function getPopularTags($max = 5)
+    {
+        $tags = array();
+
+        $con = Propel::getConnection();
+        $query = '
+        SELECT %s AS tag, COUNT(%s) AS count
+        FROM %s
+        WHERE %s = ?
+        GROUP BY %s
+        ORDER BY count DESC
+        ';
+
+        $query = sprintf($query,
+        QuestionTagPeer::NORMALIZED_TAG,
+        QuestionTagPeer::NORMALIZED_TAG,
+        QuestionTagPeer::TABLE_NAME,
+        QuestionTagPeer::QUESTION_ID,
+        QuestionTagPeer::NORMALIZED_TAG
+        );
+
+        $stmt = $con->prepareStatement($query);
+        $stmt->setInt(1, $this->getId());
+        $stmt->setLimit($max);
+        $rs = $stmt->executeQuery();
+        while ($rs->next())
+        {
+            $tags[$rs->getString('tag')] = $rs->getInt('count');
+        }
+        return $tags;
+    }
 
 
 

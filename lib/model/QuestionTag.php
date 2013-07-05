@@ -9,7 +9,7 @@
  */
 class QuestionTag extends BaseQuestionTag
 {
-    // normalized_tagを保存する。
+    // normalized_tagを保存する。インデックスのために使用される通常のバージョン。
     function setTag($v)
     {
         //親のクラスsetTag()を実行する。これをやらないとtagが追加されない。

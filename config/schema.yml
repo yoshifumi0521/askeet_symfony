@@ -53,6 +53,8 @@ propel:
     user_id:     { type: integer, foreignTable: ask_user, foreignReference: id }
     question_id: { type: integer, foreignTable: ask_question, foreignReference: id }
     tag:         { type: varchar(100) }
+    name:        { type: varchar(100) }
+    name2:       { type: varchar(100) }
     normalized_tag:       { type: varchar(100) }
 
 

@@ -2,7 +2,7 @@
 
 class Tag
 {
-    //通常のタグを返す
+    //通常のタグを返す。インデックスのために使用される通常のバージョンのタグ名を返す。
     public static function normalize($tag)
     {
         $n_tag = strtolower($tag);

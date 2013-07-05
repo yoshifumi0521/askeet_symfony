@@ -4,11 +4,10 @@
 
   // var_dump(sfConfig::get('app_pager_homepage_max'));
   //helperを使う。
-  use_helper('Text', 'Global');
+  use_helper('Text', 'Global','Question');
 
 ?>
 
-<?php use_helper('Text') ?>
 
 <h1>popular questions</h1>
 
@@ -26,6 +25,9 @@
     <div class="question_body">
       <?php echo truncate_text($question->getHtmlBody(), 200) ?>
     </div>
+    <!--タグ-->
+    tags: <?php echo tags_for_question($question) ?>
+
   </div>
 <?php endforeach;?>
 

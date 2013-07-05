@@ -133,6 +133,8 @@ CREATE TABLE `ask_question_tag`
 	`user_id` INTEGER,
 	`question_id` INTEGER,
 	`tag` VARCHAR(100),
+	`name` VARCHAR(100),
+	`name2` VARCHAR(100),
 	`normalized_tag` VARCHAR(100),
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
 	PRIMARY KEY (`id`),
